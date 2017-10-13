@@ -31,7 +31,7 @@ if n_frase = 1
 	Insert point: 1, inter_3*22+inter_3a, "fn"
 
 	Insert boundary: 2, inter_3+inter_3a
-	Insert boundary: 2, inter_3*22+(inter_3a*2)
+	Insert boundary: 2, inter_3*22
 	Set interval text: 2, 2, "Estuvo tres meses sin tomar agua"
 
 	Insert boundary: 3, inter_3+inter_3a
@@ -77,7 +77,7 @@ elsif n_frase = 2
 	Insert point: 1, inter_3*18+inter_3a, "fn"
 
 	Insert boundary: 2, inter_3+inter_3a
-	Insert boundary: 2, inter_3*18+(inter_3a*2)
+	Insert boundary: 2, inter_3*18
 
 	Set interval text: 2, 2, "Caminó cien mil kilómetros"
 
@@ -123,7 +123,7 @@ elsif n_frase = 3
 	Insert point: 1, inter_3*22+inter_3a, "fn"
 
 	Insert boundary: 2, inter_3+inter_3a
-	Insert boundary: 2, inter_3*22+(inter_3a*2)
+	Insert boundary: 2, inter_3*22
 	Set interval text: 2, 2, "La guitarra se toca con obsesión"
 
 	Insert boundary: 3, inter_3+inter_3a
@@ -173,7 +173,7 @@ elsif n_frase = 4
 	Insert point: 1, inter_3*21+inter_3a, "fn"
 
 	Insert boundary: 2, inter_3+inter_3a
-	Insert boundary: 2, inter_3*22+(inter_3a*2)
+	Insert boundary: 2, inter_3*22
 	Set interval text: 2, 2, "Esa canción suena bastante bien"
 
 	Insert boundary: 3, inter_3+inter_3a
@@ -198,5 +198,7 @@ elsif n_frase = 4
 	Set interval text: 3, 9, "tan"
 	Set interval text: 3, 10, "te"
 	Set interval text: 3, 11, "bien"
+
+
 
 endif
