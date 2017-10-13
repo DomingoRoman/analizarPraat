@@ -1,5 +1,6 @@
 form frase
   real n_frase 1
+  real nsila 8
 endform
 
 #selecciona el sonido$
@@ -199,6 +200,43 @@ elsif n_frase = 4
 	Set interval text: 3, 10, "te"
 	Set interval text: 3, 11, "bien"
 
+elsif n_frase = 5
+#   Esa cancio?n suena bastante bien
+
+	nsila = 7
+	inter_1 = dur/(nsila+1)
+	inter_3 = dur/(nsila*2)+3
+	inter_3a = inter_3/2
+
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "u"
+	Insert point: 1, inter_1*3, "jo*"
+	Insert point: 1, inter_1*4, "i*"
+	Insert point: 1, inter_1*5, "je*"
+	Insert point: 1, inter_1*6, "i*"
+	Insert point: 1, inter_1*7, "o"
+	Insert point: 1, inter_3*17+inter_3a, "fn"
+
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*16
+	Set interval text: 2, 2, "Estudió mil cien libros"
+
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+(inter_3a*2)
+
+	Set interval text: 3, 2, "Es"
+	Set interval text: 3, 3, "tu"
+	Set interval text: 3, 4, "dió"
+	Set interval text: 3, 5, "mil"
+	Set interval text: 3, 6, "cien"
+	Set interval text: 3, 7, "li"
+	Set interval text: 3, 8, "bros"
 
 
 endif
