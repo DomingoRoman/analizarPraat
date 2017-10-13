@@ -1,24 +1,68 @@
 form frase
-  real numero_frase 1
+  real n_frase 1
 endform
 
-writeInfoLine: numero_frase
+#selecciona el sonido$
+sonido$ = selected$("Sound")
 
-selecciona el sonido$
-dur = get total duration
+# Obtiene la duración del audio
+dur = Get total duration
 
-
-crea textGrid
+# Crea textGrid
 To TextGrid: "voc frs sil", "voc"
 
 if n_frase = 1
-# Estuvo tres meses sin tomar agua
-  n_sil = 11
-  Insert boundary: 2, 0.5
+# 11 sílabas
+	inter_1 = dur/13
+	inter_3 = dur/26
+	inter_3a = inter_3/2
+
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "u*"
+	Insert point: 1, inter_1*3, "o"
+	Insert point: 1, inter_1*4, "e*"
+	Insert point: 1, inter_1*5, "e*"
+	Insert point: 1, inter_1*6, "e"
+	Insert point: 1, inter_1*7, "i"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "a*"
+	Insert point: 1, inter_1*10, "a*"
+	Insert point: 1, inter_1*11, "wa"
+	Insert point: 1, inter_3*22+inter_3a, "fn"
+
+	Insert boundary: 2, inter_1
+	Insert boundary: 2, inter_3*22+(inter_3a*2)
+	Set interval text: 2, 2, "Estuvo tres meses sin tomar agua"
+
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*22+(inter_3a*2)
+
+	Set interval text: 3, 2, "Es"
+	Set interval text: 3, 3, "tu"
+	Set interval text: 3, 4, "vo"
+	Set interval text: 3, 5, "tres"
+	Set interval text: 3, 6, "me"
+	Set interval text: 3, 7, "se"
+	Set interval text: 3, 8, "sin"
+	Set interval text: 3, 9, "to"
+	Set interval text: 3, 10, "ma"
+	Set interval text: 3, 11, "ra"
+	Set interval text: 3, 12, "gwa"
+
+elsif n_frase = 2
 
 
-elsif n_frase = 1
-
+endif
 
 
 
