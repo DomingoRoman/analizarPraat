@@ -2,6 +2,7 @@ form frase
   real n_frase 1
   real nsila 8
 endform
+ns2 = nsila*2
 
 #selecciona el sonido$
 sonido$ = selected$("Sound")
@@ -14,8 +15,11 @@ To TextGrid: "voc frs sil", "voc"
 
 if n_frase = 1
 # 11 sílabas
-	inter_1 = dur/13
-	inter_3 = dur/26
+ 	inter_1 = dur/(nsila+2)
+#	inter_1 = dur/13
+
+#	inter_3 = dur/26
+	inter_3 = dur/(nsila*2+4)
 	inter_3a = inter_3/2
 
 	Insert point: 1, inter_1, "e"
@@ -32,7 +36,7 @@ if n_frase = 1
 	Insert point: 1, inter_3*22+inter_3a, "fn"
 
 	Insert boundary: 2, inter_3+inter_3a
-	Insert boundary: 2, inter_3*22
+	Insert boundary: 2, inter_3*22+(inter_3a*2)
 	Set interval text: 2, 2, "Estuvo tres meses sin tomar agua"
 
 	Insert boundary: 3, inter_3+inter_3a
@@ -59,6 +63,7 @@ if n_frase = 1
 	Set interval text: 3, 10, "ma"
 	Set interval text: 3, 11, "ra"
 	Set interval text: 3, 12, "gwa"
+
 
 elsif n_frase = 2
 # 9 sílabas
