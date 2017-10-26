@@ -1,0 +1,2674 @@
+# Selecciona el directorio
+
+directorio$ = chooseDirectory$: "Elige la carpeta"
+
+exten$ = "-sanp.TextGrid"
+agreg$ = "-sanp"
+
+files = Create Strings as file list... files 'directorio$'/*wav
+#files = Create Strings as file list... files 'directorio$'\*wav
+
+n = Get number of strings
+
+for i to n
+	select files
+	filename$ = Get string... i
+	sound = Read from file... 'directorio$'/'filename$'
+
+	largo_nombre = length (filename$)
+
+	if largo_nombre = 16
+		item$ = mid$ (audio$[i],11,1)
+	endif
+
+	if largo_nombre =17
+		item$ = mid$ (audio$[i],11,2)
+	endif
+
+    name$ = filename$+agreg$
+	Rename... 'name$'
+	appendInfoLine: name$
+endfor
+
+n_frase = number(item$)
+
+if n_frase == 13 or n_frase == 32
+	nsila = 5
+elsif n_frase == 48
+	nsila = 6
+elsif n_frase == 5
+	nsila = 7
+elsif n_frase == 2 or n_frase == 8
+	nsila = 9
+elsif n_frase == 4 or n_frase == 11 or n_frase == 29 or n_frase == 37
+	nsila = 10
+elsif n_frase == 1 or n_frase == 3 or n_frase == 6 or n_frase == 10 or n_frase == 12 or n_frase == 16 
+... or n_frase == 19 or n_frase == 23 or n_frase == 26 or n_frase == 28 or n_frase == 30 or n_frase == 33
+... or n_frase == 34 or n_frase == 36 or n_frase == 38 or n_frase == 41 or n_frase == 42 or n_frase == 43 
+... or n_frase == 47 or n_frase == 49 or n_frase == 54 
+	nsila = 11
+elsif n_frase == 24 or n_frase == 44
+	nsila = 12
+elsif n_frase == 7
+	nsila = 14
+elsif n_frase == 9 or n_frase == 22 or n_frase == 27 or n_frase == 40 or n_frase == 45 or n_frase == 53
+	nsila = 16
+elsif n_frase == 39
+	nsila = 17
+elsif n_frase == 50
+	nsila = 18
+elsif n_frase == 52
+	nsila = 19
+elsif n_frase == 14 or n_frase == 15 or n_frase == 35 or n_frase == 46 or n_frase == 51 
+	nsila = 21
+elsif n_frase == 31
+	nsila = 22
+elsif n_frase == 18
+	nsila = 25
+elsif n_frase == 20 or n_frase == 21 or n_frase == 27
+	nsila = 27
+elsif n_frase == 17
+	nsila = 32
+endif
+
+
+ns2 = nsila*2
+
+#selecciona el sonido$
+sonido$ = selected$("Sound")
+
+# Obtiene la duración del audio
+dur = Get total duration
+
+inter_1 = dur/(nsila+2)
+inter_3 = dur/(nsila*2+4)
+inter_3a = inter_3/2
+
+# Crea textGrid
+To TextGrid: "voc frs sil", "voc"
+
+if n_frase = 1
+# 11 sílabas
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "u*"
+	Insert point: 1, inter_1*3, "o"
+	Insert point: 1, inter_1*4, "e*"
+	Insert point: 1, inter_1*5, "e*"
+	Insert point: 1, inter_1*6, "e"
+	Insert point: 1, inter_1*7, "i"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "a*"
+	Insert point: 1, inter_1*10, "a*"
+	Insert point: 1, inter_1*11, "wa"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Estuvo tres meses sin tomar agua"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Es"
+	Set interval text: 3, 3, "tu"
+	Set interval text: 3, 4, "vo"
+	Set interval text: 3, 5, "tres"
+	Set interval text: 3, 6, "me"
+	Set interval text: 3, 7, "se"
+	Set interval text: 3, 8, "sin"
+	Set interval text: 3, 9, "to"
+	Set interval text: 3, 10, "ma"
+	Set interval text: 3, 11, "ra"
+	Set interval text: 3, 12, "gwa"
+
+elsif n_frase = 2
+	Insert point: 1, inter_1, "a"
+	Insert point: 1, inter_1*2, "i"
+	Insert point: 1, inter_1*3, "o*"
+	Insert point: 1, inter_1*4, "e*"
+	Insert point: 1, inter_1*5, "i*"
+	Insert point: 1, inter_1*6, "i"
+	Insert point: 1, inter_1*7, "o*"
+	Insert point: 1, inter_1*8, "e"
+	Insert point: 1, inter_1*9, "0*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Caminó cien mil kilómetros"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Ca"
+	Set interval text: 3, 3, "mi"
+	Set interval text: 3, 4, "nó"
+	Set interval text: 3, 5, "cien"
+	Set interval text: 3, 6, "mil"
+	Set interval text: 3, 7, "ki"
+	Set interval text: 3, 8, "ló"
+	Set interval text: 3, 9, "me"
+	Set interval text: 3, 10, "tros"
+
+elsif n_frase = 3
+	Insert point: 1, inter_1, "a"
+	Insert point: 1, inter_1*2, "i"
+	Insert point: 1, inter_1*3, "a*"
+	Insert point: 1, inter_1*4, "a"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "o*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "o"
+	Insert point: 1, inter_1*10, "e"
+	Insert point: 1, inter_1*11, "jo*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "La guitarra se toca con obsesión"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "La"
+	Set interval text: 3, 3, "gui"
+	Set interval text: 3, 4, "ta"
+	Set interval text: 3, 5, "rra"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "to"
+	Set interval text: 3, 8, "ca"
+	Set interval text: 3, 9, "co"
+	Set interval text: 3, 10, "nob"
+	Set interval text: 3, 11, "se"
+	Set interval text: 3, 12, "sion"
+
+
+elsif n_frase = 4
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "a"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "jo*"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "a"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "a*"
+	Insert point: 1, inter_1*9, "e"
+	Insert point: 1, inter_1*10, "je*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Esa canción suena bastante bien"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "E"
+	Set interval text: 3, 3, "sa"
+	Set interval text: 3, 4, "can"
+	Set interval text: 3, 5, "sión"
+	Set interval text: 3, 6, "sue"
+	Set interval text: 3, 7, "na"
+	Set interval text: 3, 8, "bas"
+	Set interval text: 3, 9, "tan"
+	Set interval text: 3, 10, "te"
+	Set interval text: 3, 11, "bien"
+
+
+elsif n_frase = 5
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "u"
+	Insert point: 1, inter_1*3, "jo*"
+	Insert point: 1, inter_1*4, "i*"
+	Insert point: 1, inter_1*5, "je*"
+	Insert point: 1, inter_1*6, "i*"
+	Insert point: 1, inter_1*7, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Estudió mil cien libros"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Es"
+	Set interval text: 3, 3, "tu"
+	Set interval text: 3, 4, "dió"
+	Set interval text: 3, 5, "mil"
+	Set interval text: 3, 6, "cien"
+	Set interval text: 3, 7, "li"
+	Set interval text: 3, 8, "bros"
+
+elsif n_frase = 6
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "o"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "o*"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "ui*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "o"
+	Insert point: 1, inter_1*10, "e"
+	Insert point: 1, inter_1*11, "jo*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "El corazón se cuida con obsesión"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "El"
+	Set interval text: 3, 3, "co"
+	Set interval text: 3, 4, "ra"
+	Set interval text: 3, 5, "zón"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "cui"
+	Set interval text: 3, 8, "da"
+	Set interval text: 3, 9, "co"
+	Set interval text: 3, 10, "nob"
+	Set interval text: 3, 11, "se"
+	Set interval text: 3, 12, "sion"
+
+elsif n_frase = 7
+	Insert point: 1, inter_1, "a"
+	Insert point: 1, inter_1*2, "i*"
+	Insert point: 1, inter_1*3, "o"
+	Insert point: 1, inter_1*4, "ie*"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "e*"
+	Insert point: 1, inter_1*7, "i*"
+	Insert point: 1, inter_1*8, "a"
+	Insert point: 1, inter_1*9, "o"
+	Insert point: 1, inter_1*10, "e*"
+	Insert point: 1, inter_1*11, "a"
+	Insert point: 1, inter_1*12, "i"
+	Insert point: 1, inter_1*13, "a*"
+	Insert point: 1, inter_1*14, "a"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Amigo, ¿quieres venir a comer a mi casa?"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "A"
+	Set interval text: 3, 3, "mi"
+	Set interval text: 3, 4, "go"
+	Set interval text: 3, 5, "quie"
+	Set interval text: 3, 6, "res"
+	Set interval text: 3, 7, "ve"
+	Set interval text: 3, 8, "ni"
+	Set interval text: 3, 9, "ra"
+	Set interval text: 3, 10, "co"
+	Set interval text: 3, 11, "me"
+	Set interval text: 3, 12, "ra"
+	Set interval text: 3, 12, "mi"
+	Set interval text: 3, 12, "ca"
+	Set interval text: 3, 12, "sa"
+
+elsif n_frase = 8
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "u*"
+	Insert point: 1, inter_1*3, "ae"
+	Insert point: 1, inter_1*4, "a*"
+	Insert point: 1, inter_1*5, "a"
+	Insert point: 1, inter_1*6, "a"
+	Insert point: 1, inter_1*7, "a*"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "¿Le gusta el pan amasado?"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "¿le"
+	Set interval text: 3, 3, "gus"
+	Set interval text: 3, 4, "tael"
+	Set interval text: 3, 5, "pa"
+	Set interval text: 3, 6, "na"
+	Set interval text: 3, 7, "ma"
+	Set interval text: 3, 8, "sa"
+	Set interval text: 3, 9, "do"
+
+elsif n_frase = 9
+	Insert point: 1, inter_1, "o*"
+	Insert point: 1, inter_1*2, "i"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "e*"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "a"
+	Insert point: 1, inter_1*7, "i*"
+	Insert point: 1, inter_1*8, "a"
+	Insert point: 1, inter_1*9, "e"
+	Insert point: 1, inter_1*10, "o"
+	Insert point: 1, inter_1*11, "e"
+	Insert point: 1, inter_1*12, "i*"
+	Insert point: 1, inter_1*13, "a"
+	Insert point: 1, inter_1*14, "a"
+	Insert point: 1, inter_1*15, "a"
+	Insert point: 1, inter_1*16, "o*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Lógicamente, sabía que no tenía la razón"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Ló"
+	Set interval text: 3, 3, "gi"
+	Set interval text: 3, 4, "ca"
+	Set interval text: 3, 5, "men"
+	Set interval text: 3, 6, "te"
+	Set interval text: 3, 7, "sa"
+	Set interval text: 3, 8, "bí"
+	Set interval text: 3, 9, "a"
+	Set interval text: 3, 10, "que"
+	Set interval text: 3, 11, "no"
+	Set interval text: 3, 12, "te"
+	Set interval text: 3, 13, "ní"
+	Set interval text: 3, 14, "a"
+	Set interval text: 3, 15, "la"
+	Set interval text: 3, 16, "ra"
+	Set interval text: 3, 17, "zón"
+
+elsif n_frase = 10
+	Insert point: 1, inter_1, "a"
+	Insert point: 1, inter_1*2, "a*"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "a"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "a*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "a*"
+	Insert point: 1, inter_1*10, "i"
+	Insert point: 1, inter_1*11, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "La cáscara se saca con pánico"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "La"
+	Set interval text: 3, 3, "cas"
+	Set interval text: 3, 4, "ca"
+	Set interval text: 3, 5, "ra"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "sa"
+	Set interval text: 3, 8, "ca"
+	Set interval text: 3, 9, "con"
+	Set interval text: 3, 10, "pá"
+	Set interval text: 3, 11, "ni"
+	Set interval text: 3, 12, "co"
+
+elsif n_frase = 11
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "a*"
+	Insert point: 1, inter_1*3, "o"
+	Insert point: 1, inter_1*4, "o*"
+	Insert point: 1, inter_1*5, "i*"
+	Insert point: 1, inter_1*6, "e"
+	Insert point: 1, inter_1*7, "o"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "je*"
+	Insert point: 1, inter_1*10, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "El año dos mil se conocieron"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*18+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "E"
+	Set interval text: 3, 3, "la"
+	Set interval text: 3, 4, "ño"
+	Set interval text: 3, 5, "dos"
+	Set interval text: 3, 6, "mil"
+	Set interval text: 3, 7, "se"
+	Set interval text: 3, 8, "co"
+	Set interval text: 3, 9, "no"
+	Set interval text: 3, 10, "cie"
+	Set interval text: 3, 11, "ron"
+
+elsif n_frase = 12
+	Insert point: 1, inter_1, "a"
+	Insert point: 1, inter_1*2, "i"
+	Insert point: 1, inter_1*3, "a*"
+	Insert point: 1, inter_1*4, "a"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "o*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "a*"
+	Insert point: 1, inter_1*10, "i"
+	Insert point: 1, inter_1*11, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "La guitarra se toca con pánico"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "La"
+	Set interval text: 3, 3, "gui"
+	Set interval text: 3, 4, "ta"
+	Set interval text: 3, 5, "rra"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "to"
+	Set interval text: 3, 8, "ca"
+	Set interval text: 3, 9, "con"
+	Set interval text: 3, 10, "pá"
+	Set interval text: 3, 11, "ni"
+	Set interval text: 3, 12, "co"
+
+elsif n_frase = 13
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "u*"
+	Insert point: 1, inter_1*3, "ae"
+	Insert point: 1, inter_1*4, "a*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "¿Le gusta el pan?"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "¿le"
+	Set interval text: 3, 3, "gus"
+	Set interval text: 3, 4, "tael"
+	Set interval text: 3, 5, "pan"
+
+
+elsif n_frase = 14
+	Insert point: 1, inter_1, "o"
+	Insert point: 1, inter_1*2, "o"
+	Insert point: 1, inter_1*3, "o"
+	Insert point: 1, inter_1*4, "jo*"
+	Insert point: 1, inter_1*5, "je"
+	Insert point: 1, inter_1*6, "a*"
+	Insert point: 1, inter_1*7, "o"
+	Insert point: 1, inter_1*8, "i"
+	Insert point: 1, inter_1*9, "a"
+	Insert point: 1, inter_1*10, "a*"
+	Insert point: 1, inter_1*11, "a"
+	Insert point: 1, inter_1*12, "i"
+	Insert point: 1, inter_1*13, "a"
+	Insert point: 1, inter_1*14, "o"
+	Insert point: 1, inter_1*15, "a*"
+	Insert point: 1, inter_1*16, "a"
+	Insert point: 1, inter_1*17, "i"
+	Insert point: 1, inter_1*18, "a"
+	Insert point: 1, inter_1*19, "e*"
+	Insert point: 1, inter_1*20, "a"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "No conoció ni el campo, ni las playas, ni las montañas, ni la selva"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*33+inter_3a
+	Insert boundary: 3, inter_3*35+inter_3a
+	Insert boundary: 3, inter_3*37+inter_3a
+	Insert boundary: 3, inter_3*39+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "No"
+	Set interval text: 3, 3, "co"
+	Set interval text: 3, 4, "no"
+	Set interval text: 3, 5, "ció"
+	Set interval text: 3, 6, "niel"
+	Set interval text: 3, 7, "cam"
+	Set interval text: 3, 8, "po"
+	Set interval text: 3, 9, "ni"
+	Set interval text: 3, 10, "las"
+	Set interval text: 3, 11, "pla"
+	Set interval text: 3, 12, "yas"
+	Set interval text: 3, 13, "ni"
+	Set interval text: 3, 14, "las"
+	Set interval text: 3, 15, "mon"
+	Set interval text: 3, 16, "ta"
+	Set interval text: 3, 17, "ñas"
+	Set interval text: 3, 18, "ni"
+	Set interval text: 3, 19, "la"
+	Set interval text: 3, 20, "sel"
+	Set interval text: 3, 21, "va"
+
+elsif n_frase = 15
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "u*"
+	Insert point: 1, inter_1*3, "ae"
+	Insert point: 1, inter_1*4, "a*"
+	Insert point: 1, inter_1*5, "a"
+	Insert point: 1, inter_1*6, "a"
+	Insert point: 1, inter_1*7, "a*"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "e"
+	Insert point: 1, inter_1*10, "a"
+	Insert point: 1, inter_1*11, "a"
+	Insert point: 1, inter_1*12, "a"
+	Insert point: 1, inter_1*13, "e"
+	Insert point: 1, inter_1*14, "i*"
+	Insert point: 1, inter_1*15, "a"
+	Insert point: 1, inter_1*16, "e"
+	Insert point: 1, inter_1*17, "ae"
+	Insert point: 1, inter_1*18, "i*"
+	Insert point: 1, inter_1*19, "a"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Me gusta el pan amasado de la panadería de la esquina"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*33+inter_3a
+	Insert boundary: 3, inter_3*35+inter_3a
+	Insert boundary: 3, inter_3*37+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Me"
+	Set interval text: 3, 3, "gus"
+	Set interval text: 3, 4, "tael"
+	Set interval text: 3, 5, "pa"
+	Set interval text: 3, 6, "na"
+	Set interval text: 3, 7, "ma"
+	Set interval text: 3, 8, "sa"
+	Set interval text: 3, 9, "do"
+	Set interval text: 3, 10, "de"
+	Set interval text: 3, 11, "la"
+	Set interval text: 3, 12, "pa"
+	Set interval text: 3, 13, "na"
+	Set interval text: 3, 14, "de"
+	Set interval text: 3, 15, "rí"
+	Set interval text: 3, 16, "a"
+	Set interval text: 3, 17, "de"
+	Set interval text: 3, 18, "laes"
+	Set interval text: 3, 19, "qui"
+	Set interval text: 3, 20, "na"
+
+
+elsif n_frase = 16
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "o"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "o*"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "uj*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "a*"
+	Insert point: 1, inter_1*10, "i"
+	Insert point: 1, inter_1*11, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "El corazón se cuida con pánico"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "El"
+	Set interval text: 3, 3, "co"
+	Set interval text: 3, 4, "ra"
+	Set interval text: 3, 5, "zón"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "cui"
+	Set interval text: 3, 8, "da"
+	Set interval text: 3, 9, "con"
+	Set interval text: 3, 10, "pá"
+	Set interval text: 3, 11, "ni"
+	Set interval text: 3, 12, "co"
+
+
+elsif n_frase = 18
+	Insert point: 1, inter_1, "o*"
+	Insert point: 1, inter_1*2, "a"
+	Insert point: 1, inter_1*3, "e"
+	Insert point: 1, inter_1*4, "a*"
+	Insert point: 1, inter_1*5, "u"
+	Insert point: 1, inter_1*6, "a"
+	Insert point: 1, inter_1*7, "a*"
+	Insert point: 1, inter_1*8, "a"
+	Insert point: 1, inter_1*9, "own"
+	Insert point: 1, inter_1*10, "e"
+	Insert point: 1, inter_1*11, "a"
+	Insert point: 1, inter_1*12, "a"
+	Insert point: 1, inter_1*13, "e*"
+	Insert point: 1, inter_1*14, "o"
+	Insert point: 1, inter_1*15, "o"
+	Insert point: 1, inter_1*16, "a"
+	Insert point: 1, inter_1*17, "i*"
+	Insert point: 1, inter_1*18, "a"
+	Insert point: 1, inter_1*19, "oe"
+	Insert point: 1, inter_1*20, "oj*"
+	Insert point: 1, inter_1*21, "e"
+	Insert point: 1, inter_1*22, "u*"
+	Insert point: 1, inter_1*23, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Voy a arrendar una casa o un departamento. Todavía no estoy seguro"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*33+inter_3a
+	Insert boundary: 3, inter_3*35+inter_3a
+	Insert boundary: 3, inter_3*37+inter_3a
+	Insert boundary: 3, inter_3*39+inter_3a
+	Insert boundary: 3, inter_3*41+inter_3a
+	Insert boundary: 3, inter_3*43+inter_3a
+	Insert boundary: 3, inter_3*45+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Vo"
+	Set interval text: 3, 3, "ya"
+	Set interval text: 3, 4, "rren"
+	Set interval text: 3, 5, "da"
+	Set interval text: 3, 6, "un"
+	Set interval text: 3, 7, "na"
+	Set interval text: 3, 8, "ca"
+	Set interval text: 3, 9, "sa"
+	Set interval text: 3, 10, "o un"
+	Set interval text: 3, 11, "de"
+	Set interval text: 3, 12, "par"
+	Set interval text: 3, 13, "ta"
+	Set interval text: 3, 14, "men"
+	Set interval text: 3, 15, "to"
+	Set interval text: 3, 16, "to"
+	Set interval text: 3, 17, "da"
+	Set interval text: 3, 18, "ví"
+	Set interval text: 3, 19, "a"
+	Set interval text: 3, 20, "noes"
+	Set interval text: 3, 21, "toy"
+	Set interval text: 3, 22, "se"
+	Set interval text: 3, 23, "gu"
+	Set interval text: 3, 24, "ro"
+
+elsif n_frase = 17
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "o"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "i*"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "e"
+	Insert point: 1, inter_1*7, "i*"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "e"
+	Insert point: 1, inter_1*10, "e"
+	Insert point: 1, inter_1*11, "i*"
+	Insert point: 1, inter_1*12, "e"
+	Insert point: 1, inter_1*13, "o"
+	Insert point: 1, inter_1*14, "e"
+	Insert point: 1, inter_1*15, "je*"
+	Insert point: 1, inter_1*16, "e"
+	Insert point: 1, inter_1*17, "i*"
+	Insert point: 1, inter_1*18, "i"
+	Insert point: 1, inter_1*19, "e"
+	Insert point: 1, inter_1*20, "o"
+	Insert point: 1, inter_1*21, "i"
+	Insert point: 1, inter_1*22, "e"
+	Insert point: 1, inter_1*23, "a"
+	Insert point: 1, inter_1*24, "u"
+	Insert point: 1, inter_1*25, "o"
+	Insert point: 1, inter_1*26, "e"
+	Insert point: 1, inter_1*27, "uj"
+	Insert point: 1, inter_1*28, "o"
+	Insert point: 1, inter_1*29, "i*"
+	Insert point: 1, inter_1*30, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "De los países vecinos —es decir, de los que tienen límites con Chile— hay uno que es muy bonito"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*33+inter_3a
+	Insert boundary: 3, inter_3*35+inter_3a
+	Insert boundary: 3, inter_3*37+inter_3a
+	Insert boundary: 3, inter_3*39+inter_3a
+	Insert boundary: 3, inter_3*41+inter_3a
+	Insert boundary: 3, inter_3*43+inter_3a
+	Insert boundary: 3, inter_3*45+inter_3a
+	Insert boundary: 3, inter_3*47+inter_3a
+	Insert boundary: 3, inter_3*51+inter_3a
+	Insert boundary: 3, inter_3*53+inter_3a
+	Insert boundary: 3, inter_3*55+inter_3a
+	Insert boundary: 3, inter_3*57+inter_3a
+	Insert boundary: 3, inter_3*61+inter_3a
+	Insert boundary: 3, inter_3*63+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "De"
+	Set interval text: 3, 3, "los"
+	Set interval text: 3, 4, "pa"
+	Set interval text: 3, 5, "í"
+	Set interval text: 3, 6, "ses"
+	Set interval text: 3, 7, "ve"
+	Set interval text: 3, 8, "ci"
+	Set interval text: 3, 9, "nos"
+	Set interval text: 3, 10, "es"
+	Set interval text: 3, 11, "de"
+	Set interval text: 3, 12, "cir"
+	Set interval text: 3, 13, "de"
+	Set interval text: 3, 14, "los"
+	Set interval text: 3, 15, "que"
+	Set interval text: 3, 16, "tie"
+	Set interval text: 3, 17, "nen"
+	Set interval text: 3, 18, "lí"
+	Set interval text: 3, 19, "mi"
+	Set interval text: 3, 20, "tes"
+	Set interval text: 3, 21, "con"
+	Set interval text: 3, 22, "Chi"
+	Set interval text: 3, 23, "le"
+	Set interval text: 3, 24, "ha"
+	Set interval text: 3, 25, "yu"
+	Set interval text: 3, 26, "no"
+	Set interval text: 3, 27, "que es"
+	Set interval text: 3, 28, "muy"
+	Set interval text: 3, 29, "bo"
+	Set interval text: 3, 30, "ni"
+	Set interval text: 3, 31, "to"
+
+elsif n_frase = 19
+	Insert point: 1, inter_1, "a"
+	Insert point: 1, inter_1*2, "a*"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "a"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "a*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "o"
+	Insert point: 1, inter_1*10, "e"
+	Insert point: 1, inter_1*11, "jo*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "La cáscara se saca con obsesión"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "La"
+	Set interval text: 3, 3, "cás"
+	Set interval text: 3, 4, "ca"
+	Set interval text: 3, 5, "ra"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "sa"
+	Set interval text: 3, 8, "ca"
+	Set interval text: 3, 9, "con"
+	Set interval text: 3, 10, "ob"
+	Set interval text: 3, 11, "se"
+	Set interval text: 3, 12, "sión"
+
+elsif n_frase = 20
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "u*"
+	Insert point: 1, inter_1*3, "ae"
+	Insert point: 1, inter_1*4, "a*"
+	Insert point: 1, inter_1*5, "a"
+	Insert point: 1, inter_1*6, "a"
+	Insert point: 1, inter_1*7, "a*"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "e"
+	Insert point: 1, inter_1*10, "a"
+	Insert point: 1, inter_1*11, "a"
+	Insert point: 1, inter_1*12, "a"
+	Insert point: 1, inter_1*13, "e"
+	Insert point: 1, inter_1*14, "i*"
+	Insert point: 1, inter_1*15, "a"
+	Insert point: 1, inter_1*16, "e"
+	Insert point: 1, inter_1*17, "ae"
+	Insert point: 1, inter_1*18, "i*"
+	Insert point: 1, inter_1*19, "a"
+	Insert point: 1, inter_1*20, "o"
+	Insert point: 1, inter_1*21, "ea"
+	Insert point: 1, inter_1*22, "je*"
+	Insert point: 1, inter_1*23, "e"
+	Insert point: 1, inter_1*24, "je*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "¿Le gusta el pan amasado de la panader a de la esquina donde atienden bien?"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*33+inter_3a
+	Insert boundary: 3, inter_3*35+inter_3a
+	Insert boundary: 3, inter_3*37+inter_3a
+	Insert boundary: 3, inter_3*39+inter_3a
+	Insert boundary: 3, inter_3*41+inter_3a
+	Insert boundary: 3, inter_3*43+inter_3a
+	Insert boundary: 3, inter_3*45+inter_3a
+	Insert boundary: 3, inter_3*47+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "¿Le"
+	Set interval text: 3, 3, "gus"
+	Set interval text: 3, 4, "ta el"
+	Set interval text: 3, 5, "pa"
+	Set interval text: 3, 6, "na"
+	Set interval text: 3, 7, "ma"
+	Set interval text: 3, 8, "sa"
+	Set interval text: 3, 9, "do"
+	Set interval text: 3, 10, "de"
+	Set interval text: 3, 11, "la"
+	Set interval text: 3, 12, "pa"
+	Set interval text: 3, 13, "na"
+	Set interval text: 3, 14, "de"
+	Set interval text: 3, 15, "rí"
+	Set interval text: 3, 16, "a"
+	Set interval text: 3, 17, "de"
+	Set interval text: 3, 18, "la es"
+	Set interval text: 3, 19, "qui"
+	Set interval text: 3, 20, "na"
+	Set interval text: 3, 21, "don"
+	Set interval text: 3, 22, "de a"
+	Set interval text: 3, 23, "tien"
+	Set interval text: 3, 24, "den"
+	Set interval text: 3, 25, "bien?"
+
+elsif n_frase = 21
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "e"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "e"
+	Insert point: 1, inter_1*5, "jo*"
+	Insert point: 1, inter_1*6, "e e"
+	Insert point: 1, inter_1*7, "u"
+	Insert point: 1, inter_1*8, "a"
+	Insert point: 1, inter_1*9, "e"
+	Insert point: 1, inter_1*10, "a"
+	Insert point: 1, inter_1*11, "a*"
+	Insert point: 1, inter_1*12, "e*"
+	Insert point: 1, inter_1*13, "a"
+	Insert point: 1, inter_1*14, "e"
+	Insert point: 1, inter_1*15, "a"
+	Insert point: 1, inter_1*16, "i*"
+	Insert point: 1, inter_1*17, "i*"
+	Insert point: 1, inter_1*18, "e"
+	Insert point: 1, inter_1*19, "a"
+	Insert point: 1, inter_1*20, "e"
+	Insert point: 1, inter_1*21, "o*"
+	Insert point: 1, inter_1*22, "a"
+	Insert point: 1, inter_1*23, "a"
+	Insert point: 1, inter_1*24, "a"
+	Insert point: 1, inter_1*25, "a*"
+	Insert point: 1, inter_1*26, "e"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "En esta región —que es una de las más bellas del país— viven las personas más amables"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*33+inter_3a
+	Insert boundary: 3, inter_3*35+inter_3a
+	Insert boundary: 3, inter_3*37+inter_3a
+	Insert boundary: 3, inter_3*39+inter_3a
+	Insert boundary: 3, inter_3*41+inter_3a
+	Insert boundary: 3, inter_3*43+inter_3a
+	Insert boundary: 3, inter_3*45+inter_3a
+	Insert boundary: 3, inter_3*47+inter_3a
+	Insert boundary: 3, inter_3*49+inter_3a
+	Insert boundary: 3, inter_3*51+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "¿E"
+	Set interval text: 3, 3, "nes"
+	Set interval text: 3, 4, "ta"
+	Set interval text: 3, 5, "re"
+	Set interval text: 3, 6, "gión"
+	Set interval text: 3, 7, "que e"
+	Set interval text: 3, 8, "su"
+	Set interval text: 3, 9, "na"
+	Set interval text: 3, 10, "de"
+	Set interval text: 3, 11, "las"
+	Set interval text: 3, 12, "más"
+	Set interval text: 3, 13, "be"
+	Set interval text: 3, 14, "llas"
+	Set interval text: 3, 15, "del"
+	Set interval text: 3, 16, "pa"
+	Set interval text: 3, 17, "ís"
+	Set interval text: 3, 18, "vi"
+	Set interval text: 3, 19, "ven"
+	Set interval text: 3, 20, "las"
+	Set interval text: 3, 21, "per"
+	Set interval text: 3, 22, "so"
+	Set interval text: 3, 23, "nas"
+	Set interval text: 3, 24, "ma"
+	Set interval text: 3, 25, "sa"
+	Set interval text: 3, 26, "ma"
+	Set interval text: 3, 27, "bles"
+
+elsif n_frase = 22
+	Insert point: 1, inter_1, "a"
+	Insert point: 1, inter_1*2, "i*"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "e"
+	Insert point: 1, inter_1*5, "o*"
+	Insert point: 1, inter_1*6, "i"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "e*"
+	Insert point: 1, inter_1*9, "e"
+	Insert point: 1, inter_1*10, "o"
+	Insert point: 1, inter_1*11, "e"
+	Insert point: 1, inter_1*12, "i*"
+	Insert point: 1, inter_1*13, "a"
+	Insert point: 1, inter_1*14, "a"
+	Insert point: 1, inter_1*15, "a"
+	Insert point: 1, inter_1*16, "o*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "sabía que, lógicamente, no tenía la razón"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Sa"
+	Set interval text: 3, 3, "bí"
+	Set interval text: 3, 4, "a"
+	Set interval text: 3, 5, "que"
+	Set interval text: 3, 6, "ló"
+	Set interval text: 3, 7, "gi"
+	Set interval text: 3, 8, "ca"
+	Set interval text: 3, 9, "men"
+	Set interval text: 3, 10, "te"
+	Set interval text: 3, 11, "no"
+	Set interval text: 3, 12, "te"
+	Set interval text: 3, 13, "ní"
+	Set interval text: 3, 14, "a"
+	Set interval text: 3, 15, "la"
+	Set interval text: 3, 16, "ra"
+	Set interval text: 3, 17, "zón"
+
+elsif n_frase = 23
+	Insert point: 1, inter_1, "a"
+	Insert point: 1, inter_1*2, "i"
+	Insert point: 1, inter_1*3, "a*"
+	Insert point: 1, inter_1*4, "a"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "o*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "á"
+	Insert point: 1, inter_1*10, "i"
+	Insert point: 1, inter_1*11, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "La guitarra se toca con pánico"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "La"
+	Set interval text: 3, 3, "gui"
+	Set interval text: 3, 4, "ta"
+	Set interval text: 3, 5, "rra"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "to"
+	Set interval text: 3, 8, "ca"
+	Set interval text: 3, 9, "con"
+	Set interval text: 3, 10, "pá"
+	Set interval text: 3, 11, "ni"
+	Set interval text: 3, 12, "co"
+
+elsif n_frase = 24
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "o*"
+	Insert point: 1, inter_1*3, "e*"
+	Insert point: 1, inter_1*4, "e"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "o"
+	Insert point: 1, inter_1*7, "jo*"
+	Insert point: 1, inter_1*8, "o*"
+	Insert point: 1, inter_1*9, "a"
+	Insert point: 1, inter_1*10, "a"
+	Insert point: 1, inter_1*11, "a*"
+	Insert point: 1, inter_1*12, "a*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Velozmente recorrió toda la cancha"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Ve"
+	Set interval text: 3, 3, "loz"
+	Set interval text: 3, 4, "men"
+	Set interval text: 3, 5, "te"
+	Set interval text: 3, 6, "re"
+	Set interval text: 3, 7, "co"
+	Set interval text: 3, 8, "rrió"
+	Set interval text: 3, 9, "to"
+	Set interval text: 3, 10, "da"
+	Set interval text: 3, 11, "la"
+	Set interval text: 3, 12, "can"
+	Set interval text: 3, 13, "cha"
+
+elsif n_frase = 25
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "u*"
+	Insert point: 1, inter_1*3, "ae"
+	Insert point: 1, inter_1*4, "a*"
+	Insert point: 1, inter_1*5, "a"
+	Insert point: 1, inter_1*6, "a"
+	Insert point: 1, inter_1*7, "a*"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "e"
+	Insert point: 1, inter_1*10, "a"
+	Insert point: 1, inter_1*11, "a"
+	Insert point: 1, inter_1*12, "a"
+	Insert point: 1, inter_1*13, "e"
+	Insert point: 1, inter_1*14, "i*"
+	Insert point: 1, inter_1*15, "a"
+	Insert point: 1, inter_1*16, "e"
+	Insert point: 1, inter_1*17, "ae"
+	Insert point: 1, inter_1*18, "i*"
+	Insert point: 1, inter_1*19, "a"
+	Insert point: 1, inter_1*20, "o"
+	Insert point: 1, inter_1*21, "ea"
+	Insert point: 1, inter_1*22, "je*"
+	Insert point: 1, inter_1*23, "e"
+	Insert point: 1, inter_1*24, "je*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Me gusta el pan amasado de la panadería de la esquina donde atienden bien"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*33+inter_3a
+	Insert boundary: 3, inter_3*35+inter_3a
+	Insert boundary: 3, inter_3*37+inter_3a
+	Insert boundary: 3, inter_3*39+inter_3a
+	Insert boundary: 3, inter_3*41+inter_3a
+	Insert boundary: 3, inter_3*43+inter_3a
+	Insert boundary: 3, inter_3*45+inter_3a
+	Insert boundary: 3, inter_3*47+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Me"
+	Set interval text: 3, 3, "gus"
+	Set interval text: 3, 4, "ta el"
+	Set interval text: 3, 5, "pa"
+	Set interval text: 3, 6, "na"
+	Set interval text: 3, 7, "ma"
+	Set interval text: 3, 8, "sa"
+	Set interval text: 3, 9, "do"
+	Set interval text: 3, 10, "de"
+	Set interval text: 3, 11, "la"
+	Set interval text: 3, 12, "pa"
+	Set interval text: 3, 13, "na"
+	Set interval text: 3, 14, "de"
+	Set interval text: 3, 15, "rí"
+	Set interval text: 3, 16, "a"
+	Set interval text: 3, 17, "de"
+	Set interval text: 3, 18, "la es"
+	Set interval text: 3, 19, "qui"
+	Set interval text: 3, 20, "na"
+	Set interval text: 3, 21, "don"
+	Set interval text: 3, 22, "de a"
+	Set interval text: 3, 23, "tien"
+	Set interval text: 3, 24, "den"
+	Set interval text: 3, 25, "bien"
+
+elsif n_frase = 26
+	Insert point: 1, inter_1, "a"
+	Insert point: 1, inter_1*2, "a*"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "a"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "a*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "a"
+	Insert point: 1, inter_1*10, "je*"
+	Insert point: 1, inter_1*11, "ja"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "¿La cáscara se saca con paciencia?"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "La"
+	Set interval text: 3, 3, "cás"
+	Set interval text: 3, 4, "ca"
+	Set interval text: 3, 5, "ra"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "sa"
+	Set interval text: 3, 8, "ca"
+	Set interval text: 3, 9, "con"
+	Set interval text: 3, 10, "pa"
+	Set interval text: 3, 11, "cien"
+	Set interval text: 3, 12, "cia"
+
+elsif n_frase = 27
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "u"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "i*"
+	Insert point: 1, inter_1*5, "a"
+	Insert point: 1, inter_1*6, "e"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "a*"
+	Insert point: 1, inter_1*9, "a"
+	Insert point: 1, inter_1*10, "a*"
+	Insert point: 1, inter_1*11, "e"
+	Insert point: 1, inter_1*12, "i*"
+	Insert point: 1, inter_1*13, "o"
+	Insert point: 1, inter_1*14, "a"
+	Insert point: 1, inter_1*15, "i*"
+	Insert point: 1, inter_1*16, "a"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Me gustaría que viajaras más seguido, María"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Me"
+	Set interval text: 3, 3, "gus"
+	Set interval text: 3, 4, "ta"
+	Set interval text: 3, 5, "rí"
+	Set interval text: 3, 6, "a"
+	Set interval text: 3, 7, "que"
+	Set interval text: 3, 8, "via"
+	Set interval text: 3, 9, "ja"
+	Set interval text: 3, 10, "ras"
+	Set interval text: 3, 11, "más"
+	Set interval text: 3, 12, "se"
+	Set interval text: 3, 13, "gui"
+	Set interval text: 3, 14, "do"
+	Set interval text: 3, 15, "Ma"
+	Set interval text: 3, 16, "rí"
+	Set interval text: 3, 17, "a"
+
+elsif n_frase = 28
+	Insert point: 1, inter_1, "a"
+	Insert point: 1, inter_1*2, "i"
+	Insert point: 1, inter_1*3, "a*"
+	Insert point: 1, inter_1*4, "a"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "o*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "a*"
+	Insert point: 1, inter_1*10, "i"
+	Insert point: 1, inter_1*11, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "¿La guitarra se toca con pánico?"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "La"
+	Set interval text: 3, 3, "gui"
+	Set interval text: 3, 4, "ta"
+	Set interval text: 3, 5, "rra"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "to"
+	Set interval text: 3, 8, "ca"
+	Set interval text: 3, 9, "con"
+	Set interval text: 3, 10, "pá"
+	Set interval text: 3, 11, "ni"
+	Set interval text: 3, 12, "co"
+
+elsif n_frase = 29
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "o"
+	Insert point: 1, inter_1*3, "o*"
+	Insert point: 1, inter_1*4, "i*"
+	Insert point: 1, inter_1*5, "je*"
+	Insert point: 1, inter_1*6, "e*"
+	Insert point: 1, inter_1*7, "o"
+	Insert point: 1, inter_1*8, "i"
+	Insert point: 1, inter_1*9, "e*"
+	Insert point: 1, inter_1*10, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Me costó mil cien pesos chilenos"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*18+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Me"
+	Set interval text: 3, 3, "cos"
+	Set interval text: 3, 4, "tó"
+	Set interval text: 3, 5, "mil"
+	Set interval text: 3, 6, "cien"
+	Set interval text: 3, 7, "pe"
+	Set interval text: 3, 8, "sos"
+	Set interval text: 3, 9, "chi"
+	Set interval text: 3, 10, "le"
+	Set interval text: 3, 11, "nos"
+
+elsif n_frase = 30
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "o"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "o*"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "uj*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "a"
+	Insert point: 1, inter_1*10, "je*"
+	Insert point: 1, inter_1*11, "ja"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "El corazón se cuida con paciencia"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "El"
+	Set interval text: 3, 3, "co"
+	Set interval text: 3, 4, "ra"
+	Set interval text: 3, 5, "zón"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "cui"
+	Set interval text: 3, 8, "da"
+	Set interval text: 3, 9, "con"
+	Set interval text: 3, 10, "pa"
+	Set interval text: 3, 11, "cien"
+	Set interval text: 3, 12, "cia"
+
+elsif n_frase = 31
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "o*"
+	Insert point: 1, inter_1*3, "o"
+	Insert point: 1, inter_1*4, "e"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "a*"
+	Insert point: 1, inter_1*7, "e"
+	Insert point: 1, inter_1*8, "a*"
+	Insert point: 1, inter_1*9, "a*"
+	Insert point: 1, inter_1*10, "e"
+	Insert point: 1, inter_1*11, "e"
+	Insert point: 1, inter_1*12, "i*"
+	Insert point: 1, inter_1*13, "e"
+	Insert point: 1, inter_1*14, "a"
+	Insert point: 1, inter_1*15, "i*"
+	Insert point: 1, inter_1*16, "ae"
+	Insert point: 1, inter_1*17, "a"
+	Insert point: 1, inter_1*18, "a"
+	Insert point: 1, inter_1*19, "u*"
+	Insert point: 1, inter_1*20, "a"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "El cóndor —que es el ave más grande de Chile— habita en las alturas"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*33+inter_3a
+	Insert boundary: 3, inter_3*35+inter_3a
+	Insert boundary: 3, inter_3*37+inter_3a
+	Insert boundary: 3, inter_3*39+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "El"
+	Set interval text: 3, 3, "cón"
+	Set interval text: 3, 4, "dor"
+	Set interval text: 3, 5, "que e"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "la"
+	Set interval text: 3, 8, "ve"
+	Set interval text: 3, 9, "más"
+	Set interval text: 3, 10, "gran"
+	Set interval text: 3, 11, "de"
+	Set interval text: 3, 12, "de"
+	Set interval text: 3, 13, "Chi"
+	Set interval text: 3, 14, "le ha"
+	Set interval text: 3, 15, "bi"
+	Set interval text: 3, 16, "ta en"
+	Set interval text: 3, 17, "la"
+	Set interval text: 3, 18, "sal"
+	Set interval text: 3, 19, "tu"
+	Set interval text: 3, 20, "ras"
+
+elsif n_frase = 32
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "u*"
+	Insert point: 1, inter_1*3, "ae"
+	Insert point: 1, inter_1*4, "a*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Me gusta el pan"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Me"
+	Set interval text: 3, 3, "gus"
+	Set interval text: 3, 4, "tael"
+	Set interval text: 3, 5, "pan"
+
+elsif n_frase = 33
+	Insert point: 1, inter_1, "a"
+	Insert point: 1, inter_1*2, "i"
+	Insert point: 1, inter_1*3, "a*"
+	Insert point: 1, inter_1*4, "a"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "o*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "a"
+	Insert point: 1, inter_1*10, "je*"
+	Insert point: 1, inter_1*11, "ja"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "¿La guitarra se toca con paciencia?"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "La"
+	Set interval text: 3, 3, "gui"
+	Set interval text: 3, 4, "ta"
+	Set interval text: 3, 5, "rra"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "to"
+	Set interval text: 3, 8, "ca"
+	Set interval text: 3, 9, "con"
+	Set interval text: 3, 10, "pa"
+	Set interval text: 3, 11, "cien"
+	Set interval text: 3, 12, "cia"
+
+elsif n_frase = 34
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "a"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "jo*"
+	Insert point: 1, inter_1*5, "i*"
+	Insert point: 1, inter_1*6, "i"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "e"
+	Insert point: 1, inter_1*10, "u*"
+	Insert point: 1, inter_1*11, "a"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Esa canción típica no me gusta"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "E"
+	Set interval text: 3, 3, "sa"
+	Set interval text: 3, 4, "can"
+	Set interval text: 3, 5, "ción"
+	Set interval text: 3, 6, "tí"
+	Set interval text: 3, 7, "pi"
+	Set interval text: 3, 8, "ca"
+	Set interval text: 3, 9, "no"
+	Set interval text: 3, 10, "me"
+	Set interval text: 3, 11, "gus"
+	Set interval text: 3, 12, "ta"
+
+elsif n_frase = 35
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "u*"
+	Insert point: 1, inter_1*3, "ae"
+	Insert point: 1, inter_1*4, "a*"
+	Insert point: 1, inter_1*5, "a"
+	Insert point: 1, inter_1*6, "a"
+	Insert point: 1, inter_1*7, "a*"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "e"
+	Insert point: 1, inter_1*10, "a"
+	Insert point: 1, inter_1*11, "a"
+	Insert point: 1, inter_1*12, "a"
+	Insert point: 1, inter_1*13, "e"
+	Insert point: 1, inter_1*14, "i*"
+	Insert point: 1, inter_1*15, "a"
+	Insert point: 1, inter_1*16, "e"
+	Insert point: 1, inter_1*17, "ae"
+	Insert point: 1, inter_1*18, "i*"
+	Insert point: 1, inter_1*19, "a"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "¿Le gusta el pan amasado de la panadería de la esquina?"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*33+inter_3a
+	Insert boundary: 3, inter_3*35+inter_3a
+	Insert boundary: 3, inter_3*37+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "¿Le"
+	Set interval text: 3, 3, "gus"
+	Set interval text: 3, 4, "tael"
+	Set interval text: 3, 5, "pa"
+	Set interval text: 3, 6, "na"
+	Set interval text: 3, 7, "ma"
+	Set interval text: 3, 8, "sa"
+	Set interval text: 3, 9, "do"
+	Set interval text: 3, 10, "de"
+	Set interval text: 3, 11, "la"
+	Set interval text: 3, 12, "pa"
+	Set interval text: 3, 13, "na"
+	Set interval text: 3, 14, "de"
+	Set interval text: 3, 15, "rí"
+	Set interval text: 3, 16, "a"
+	Set interval text: 3, 17, "de"
+	Set interval text: 3, 18, "laes"
+	Set interval text: 3, 19, "qui"
+	Set interval text: 3, 20, "na?"
+
+elsif n_frase = 36
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "a*"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "a"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "a*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "o"
+	Insert point: 1, inter_1*10, "e"
+	Insert point: 1, inter_1*11, "jo*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "¿La cáscara se saca con obsesión?"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "La"
+	Set interval text: 3, 3, "cas"
+	Set interval text: 3, 4, "ca"
+	Set interval text: 3, 5, "ra"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "sa"
+	Set interval text: 3, 8, "ca"
+	Set interval text: 3, 9, "co"
+	Set interval text: 3, 10, "nob"
+	Set interval text: 3, 11, "se"
+	Set interval text: 3, 12, "sión"
+
+elsif n_frase = 37
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "a*"
+	Insert point: 1, inter_1*3, "o"
+	Insert point: 1, inter_1*4, "o*"
+	Insert point: 1, inter_1*5, "i*"
+	Insert point: 1, inter_1*6, "e*"
+	Insert point: 1, inter_1*7, "e"
+	Insert point: 1, inter_1*8, "a"
+	Insert point: 1, inter_1*9, "a*"
+	Insert point: 1, inter_1*10, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "El año dos mil tres se casaron"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*18+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "E"
+	Set interval text: 3, 3, "la"
+	Set interval text: 3, 4, "ño"
+	Set interval text: 3, 5, "dos"
+	Set interval text: 3, 6, "mil"
+	Set interval text: 3, 7, "tres"
+	Set interval text: 3, 8, "se"
+	Set interval text: 3, 9, "ca"
+	Set interval text: 3, 10, "sa"
+	Set interval text: 3, 11, "ron"
+
+elsif n_frase = 38
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "o"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "o*"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "uj*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "a*"
+	Insert point: 1, inter_1*10, "i"
+	Insert point: 1, inter_1*11, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "¿El corazón se cuida con pánico?"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "El"
+	Set interval text: 3, 3, "co"
+	Set interval text: 3, 4, "ra"
+	Set interval text: 3, 5, "zón"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "cui"
+	Set interval text: 3, 8, "da"
+	Set interval text: 3, 9, "con"
+	Set interval text: 3, 10, "pá"
+	Set interval text: 3, 11, "ni"
+	Set interval text: 3, 12, "co"
+
+elsif n_frase = 39
+	Insert point: 1, inter_1, "o"
+	Insert point: 1, inter_1*2, "o"
+	Insert point: 1, inter_1*3, "joe*"
+	Insert point: 1, inter_1*4, "a*"
+	Insert point: 1, inter_1*5, "o"
+	Insert point: 1, inter_1*6, "a*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "a"
+	Insert point: 1, inter_1*9, "a"
+	Insert point: 1, inter_1*10, "o"
+	Insert point: 1, inter_1*11, "a*"
+	Insert point: 1, inter_1*12, "a"
+	Insert point: 1, inter_1*13, "i"
+	Insert point: 1, inter_1*14, "a"
+	Insert point: 1, inter_1*15, "e*"
+	Insert point: 1, inter_1*16, "a"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Conoció el campo, las playas, las montañas y la selva"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Co"
+	Set interval text: 3, 3, "no"
+	Set interval text: 3, 4, "cióel"
+	Set interval text: 3, 5, "cam"
+	Set interval text: 3, 6, "po"
+	Set interval text: 3, 7, "las"
+	Set interval text: 3, 8, "pla"
+	Set interval text: 3, 9, "yas"
+	Set interval text: 3, 10, "las"
+	Set interval text: 3, 11, "mon"
+	Set interval text: 3, 12, "ta"
+	Set interval text: 3, 13, "ña"
+	Set interval text: 3, 14, "si"
+	Set interval text: 3, 15, "la"
+	Set interval text: 3, 16, "sel"
+	Set interval text: 3, 17, "va"
+
+elsif n_frase = 40
+	Insert point: 1, inter_1, "i"
+	Insert point: 1, inter_1*2, "e*"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "e*"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "e"
+	Insert point: 1, inter_1*7, "a*"
+	Insert point: 1, inter_1*8, "a"
+	Insert point: 1, inter_1*9, "e"
+	Insert point: 1, inter_1*10, "oa"
+	Insert point: 1, inter_1*11, "i*"
+	Insert point: 1, inter_1*12, "a"
+	Insert point: 1, inter_1*13, "e*"
+	Insert point: 1, inter_1*14, "o"
+	Insert point: 1, inter_1*15, "je*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Sinceramente pensaba que lo había hecho bien"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Sin"
+	Set interval text: 3, 3, "ce"
+	Set interval text: 3, 4, "ra"
+	Set interval text: 3, 5, "men"
+	Set interval text: 3, 6, "te"
+	Set interval text: 3, 7, "pen"
+	Set interval text: 3, 8, "sa"
+	Set interval text: 3, 9, "ba"
+	Set interval text: 3, 10, "que"
+	Set interval text: 3, 11, "loa"
+	Set interval text: 3, 12, "bí"
+	Set interval text: 3, 13, "a"
+	Set interval text: 3, 14, "he"
+	Set interval text: 3, 15, "cho"
+	Set interval text: 3, 16, "bien"
+
+elsif n_frase = 41
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "o"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "o*"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "uj*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "a"
+	Insert point: 1, inter_1*10, "je"
+	Insert point: 1, inter_1*11, "ja"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "¿El corazón se cuida con paciencia?"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "El"
+	Set interval text: 3, 3, "co"
+	Set interval text: 3, 4, "ra"
+	Set interval text: 3, 5, "zón"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "cui"
+	Set interval text: 3, 8, "da"
+	Set interval text: 3, 9, "con"
+	Set interval text: 3, 10, "pa"
+	Set interval text: 3, 11, "cien"
+	Set interval text: 3, 12, "cia"
+
+elsif n_frase = 42
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "o"
+	Insert point: 1, inter_1*3, "jo*"
+	Insert point: 1, inter_1*4, "e"
+	Insert point: 1, inter_1*5, "o*"
+	Insert point: 1, inter_1*6, "e*"
+	Insert point: 1, inter_1*7, "ea"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "e*"
+	Insert point: 1, inter_1*10, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Se comió ferozmente al cordero"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Se"
+	Set interval text: 3, 3, "co"
+	Set interval text: 3, 4, "mió"
+	Set interval text: 3, 5, "fe"
+	Set interval text: 3, 6, "roz"
+	Set interval text: 3, 7, "men"
+	Set interval text: 3, 8, "teal"
+	Set interval text: 3, 9, "cor"
+	Set interval text: 3, 10, "de"
+	Set interval text: 3, 11, "ro"
+
+elsif n_frase = 43
+	Insert point: 1, inter_1, "a"
+	Insert point: 1, inter_1*2, "a*"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "a"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "a*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "a*"
+	Insert point: 1, inter_1*10, "i"
+	Insert point: 1, inter_1*11, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "La cáscara se saca con pánico"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "La"
+	Set interval text: 3, 3, "cás"
+	Set interval text: 3, 4, "ca"
+	Set interval text: 3, 5, "ra"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "sa"
+	Set interval text: 3, 8, "ca"
+	Set interval text: 3, 9, "con"
+	Set interval text: 3, 10, "pa*"
+	Set interval text: 3, 11, "ni"
+	Set interval text: 3, 12, "co"
+
+elsif n_frase = 44
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "a"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "jo*"
+	Insert point: 1, inter_1*5, "a*"
+	Insert point: 1, inter_1*6, "a"
+	Insert point: 1, inter_1*7, "o"
+	Insert point: 1, inter_1*8, "ej"
+	Insert point: 1, inter_1*9, "e"
+	Insert point: 1, inter_1*10, "e*"
+	Insert point: 1, inter_1*11, "a"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Esa canción mala no me interesa"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "E"
+	Set interval text: 3, 3, "sa"
+	Set interval text: 3, 4, "can"
+	Set interval text: 3, 5, "ción"
+	Set interval text: 3, 6, "ma"
+	Set interval text: 3, 7, "la"
+	Set interval text: 3, 8, "no"
+	Set interval text: 3, 9, "mein"
+	Set interval text: 3, 10, "te"
+	Set interval text: 3, 11, "re"
+	Set interval text: 3, 12, "sa"
+
+elsif n_frase = 45
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "o"
+	Insert point: 1, inter_1*3, "jo*"
+	Insert point: 1, inter_1*4, "ej*"
+	Insert point: 1, inter_1*5, "i*"
+	Insert point: 1, inter_1*6, "a*"
+	Insert point: 1, inter_1*7, "o"
+	Insert point: 1, inter_1*8, "u"
+	Insert point: 1, inter_1*9, "a"
+	Insert point: 1, inter_1*10, "e"
+	Insert point: 1, inter_1*11, "o*"
+	Insert point: 1, inter_1*12, "oe"
+	Insert point: 1, inter_1*13, "e"
+	Insert point: 1, inter_1*14, "a*"
+	Insert point: 1, inter_1*15, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Se comió  6000 platos durante todo el verano."
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Se"
+	Set interval text: 3, 3, "co"
+	Set interval text: 3, 4, "mió"
+	Set interval text: 3, 5, "seis"
+	Set interval text: 3, 6, "mil"
+	Set interval text: 3, 7, "pla"
+	Set interval text: 3, 8, "tos"
+	Set interval text: 3, 9, "du"
+	Set interval text: 3, 10, "ran"
+	Set interval text: 3, 11, "te"
+	Set interval text: 3, 12, "to"
+	Set interval text: 3, 13, "doel"
+	Set interval text: 3, 14, "ve"
+	Set interval text: 3, 15, "ra"
+	Set interval text: 3, 16, "no"
+
+elsif n_frase = 46
+	Insert point: 1, inter_1, "o"
+	Insert point: 1, inter_1*2, "a"
+	Insert point: 1, inter_1*3, "i*"
+	Insert point: 1, inter_1*4, "a"
+	Insert point: 1, inter_1*5, "i"
+	Insert point: 1, inter_1*6, "o"
+	Insert point: 1, inter_1*7, "e"
+	Insert point: 1, inter_1*8, "i*"
+	Insert point: 1, inter_1*9, "a"
+	Insert point: 1, inter_1*10, "u*"
+	Insert point: 1, inter_1*11, "a"
+	Insert point: 1, inter_1*12, "e"
+	Insert point: 1, inter_1*13, "u*"
+	Insert point: 1, inter_1*14, "a"
+	Insert point: 1, inter_1*15, "o"
+	Insert point: 1, inter_1*16, "i*"
+	Insert point: 1, inter_1*17, "a"
+	Insert point: 1, inter_1*18, "ow"
+	Insert point: 1, inter_1*19, "a"
+	Insert point: 1, inter_1*20, "e*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "¿No sabía si comería frutas, verduras, tortillas o un pastel"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*33+inter_3a
+	Insert boundary: 3, inter_3*35+inter_3a
+	Insert boundary: 3, inter_3*37+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "No"
+	Set interval text: 3, 3, "sa"
+	Set interval text: 3, 4, "bí"
+	Set interval text: 3, 5, "a"
+	Set interval text: 3, 6, "si"
+	Set interval text: 3, 7, "co"
+	Set interval text: 3, 8, "me"
+	Set interval text: 3, 9, "rí"
+	Set interval text: 3, 10, "a"
+	Set interval text: 3, 11, "fru"
+	Set interval text: 3, 12, "tas"
+	Set interval text: 3, 13, "ver"
+	Set interval text: 3, 14, "du"
+	Set interval text: 3, 15, "ras"
+	Set interval text: 3, 16, "tor"
+	Set interval text: 3, 17, "ti"
+	Set interval text: 3, 18, "lla"
+	Set interval text: 3, 19, "soun"
+	Set interval text: 3, 20, "pas"
+	Set interval text: 3, 20, "tel"
+
+elsif n_frase = 47
+	Insert point: 1, inter_1, "a"
+	Insert point: 1, inter_1*2, "a*"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "a"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "a*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "a*"
+	Insert point: 1, inter_1*10, "je*"
+	Insert point: 1, inter_1*11, "ja"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "La cáscara se saca con paciencia"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "La"
+	Set interval text: 3, 3, "cás"
+	Set interval text: 3, 4, "ca"
+	Set interval text: 3, 5, "ra"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "sa"
+	Set interval text: 3, 8, "ca"
+	Set interval text: 3, 9, "con"
+	Set interval text: 3, 10, "pa"
+	Set interval text: 3, 11, "cien"
+	Set interval text: 3, 12, "cia"
+
+elsif n_frase = 48
+	Insert point: 1, inter_1, "o"
+	Insert point: 1, inter_1*2, "jo*"
+	Insert point: 1, inter_1*3, "ej*"
+	Insert point: 1, inter_1*4, "i*"
+	Insert point: 1, inter_1*5, "e*"
+	Insert point: 1, inter_1*6, "o"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Corrió seis mil metros"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Co"
+	Set interval text: 3, 3, "rrió"
+	Set interval text: 3, 4, "seis"
+	Set interval text: 3, 5, "mil"
+	Set interval text: 3, 6, "me"
+	Set interval text: 3, 7, "tros"
+
+elsif n_frase = 49
+	Insert point: 1, inter_1, "a"
+	Insert point: 1, inter_1*2, "i"
+	Insert point: 1, inter_1*3, "a*"
+	Insert point: 1, inter_1*4, "a"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "o*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "o"
+	Insert point: 1, inter_1*10, "e"
+	Insert point: 1, inter_1*11, "jo*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "¿La guitarra se toca con obsesión?"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "La"
+	Set interval text: 3, 3, "gui"
+	Set interval text: 3, 4, "ta"
+	Set interval text: 3, 5, "rra"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "to"
+	Set interval text: 3, 8, "ca"
+	Set interval text: 3, 9, "co"
+	Set interval text: 3, 10, "nob"
+	Set interval text: 3, 11, "se"
+	Set interval text: 3, 12, "sión"
+
+elsif n_frase = 50
+	Insert point: 1, inter_1, "o"
+	Insert point: 1, inter_1*2, "o"
+	Insert point: 1, inter_1*3, "ej"
+	Insert point: 1, inter_1*4, "a"
+	Insert point: 1, inter_1*5, "i"
+	Insert point: 1, inter_1*6, "a"
+	Insert point: 1, inter_1*7, "a*"
+	Insert point: 1, inter_1*8, "a"
+	Insert point: 1, inter_1*9, "i*"
+	Insert point: 1, inter_1*10, "a"
+	Insert point: 1, inter_1*11, "i*"
+	Insert point: 1, inter_1*12, "a"
+	Insert point: 1, inter_1*13, "o"
+	Insert point: 1, inter_1*14, "o*"
+	Insert point: 1, inter_1*15, "a"
+	Insert point: 1, inter_1*16, "o"
+	Insert point: 1, inter_1*17, "e*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Como te imaginarás, amiga mía, no voy a volver."
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*33+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Co"
+	Set interval text: 3, 3, "mo"
+	Set interval text: 3, 4, "tei"
+	Set interval text: 3, 5, "ma"
+	Set interval text: 3, 6, "gi"
+	Set interval text: 3, 7, "na"
+	Set interval text: 3, 8, "rá"
+	Set interval text: 3, 9, "sa"
+	Set interval text: 3, 10, "mi"
+	Set interval text: 3, 11, "ga"
+	Set interval text: 3, 12, "mí"
+	Set interval text: 3, 13, "a"
+	Set interval text: 3, 14, "no"
+	Set interval text: 3, 15, "vo"
+	Set interval text: 3, 16, "ya"
+	Set interval text: 3, 17, "vol"
+	Set interval text: 3, 18, "ver"
+
+elsif n_frase = 51
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "u*"
+	Insert point: 1, inter_1*3, "ae"
+	Insert point: 1, inter_1*4, "a*"
+	Insert point: 1, inter_1*5, "a"
+	Insert point: 1, inter_1*6, "a"
+	Insert point: 1, inter_1*7, "a*"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "e"
+	Insert point: 1, inter_1*10, "a"
+	Insert point: 1, inter_1*11, "a"
+	Insert point: 1, inter_1*12, "a"
+	Insert point: 1, inter_1*13, "e"
+	Insert point: 1, inter_1*14, "i*"
+	Insert point: 1, inter_1*15, "a"
+	Insert point: 1, inter_1*16, "e"
+	Insert point: 1, inter_1*17, "ae"
+	Insert point: 1, inter_1*18, "i*"
+	Insert point: 1, inter_1*19, "a"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Me gusta el pan amasado de la panadería de la esquina"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*33+inter_3a
+	Insert boundary: 3, inter_3*35+inter_3a
+	Insert boundary: 3, inter_3*37+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Me"
+	Set interval text: 3, 3, "gus"
+	Set interval text: 3, 4, "tael"
+	Set interval text: 3, 5, "pa"
+	Set interval text: 3, 6, "na"
+	Set interval text: 3, 7, "ma"
+	Set interval text: 3, 8, "sa"
+	Set interval text: 3, 9, "do"
+	Set interval text: 3, 10, "de"
+	Set interval text: 3, 11, "la"
+	Set interval text: 3, 12, "pa"
+	Set interval text: 3, 13, "na"
+	Set interval text: 3, 14, "de"
+	Set interval text: 3, 15, "rí"
+	Set interval text: 3, 16, "a"
+	Set interval text: 3, 17, "de"
+	Set interval text: 3, 18, "laes"
+	Set interval text: 3, 19, "qui"
+	Set interval text: 3, 20, "na"
+
+elsif n_frase = 52
+	Insert point: 1, inter_1, "o"
+	Insert point: 1, inter_1*2, "o"
+	Insert point: 1, inter_1*3, "ej"
+	Insert point: 1, inter_1*4, "a"
+	Insert point: 1, inter_1*5, "i"
+	Insert point: 1, inter_1*6, "a"
+	Insert point: 1, inter_1*7, "a*"
+	Insert point: 1, inter_1*8, "a"
+	Insert point: 1, inter_1*9, "i*"
+	Insert point: 1, inter_1*10, "a"
+	Insert point: 1, inter_1*11, "i*"
+	Insert point: 1, inter_1*12, "a"
+	Insert point: 1, inter_1*13, "o"
+	Insert point: 1, inter_1*14, "o*"
+	Insert point: 1, inter_1*15, "a"
+	Insert point: 1, inter_1*16, "o"
+	Insert point: 1, inter_1*17, "e*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Como te imaginarás, amiga mía, no voy a volver."
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*31+inter_3a
+	Insert boundary: 3, inter_3*33+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Co"
+	Set interval text: 3, 3, "mo"
+	Set interval text: 3, 4, "tei"
+	Set interval text: 3, 5, "ma"
+	Set interval text: 3, 6, "gi"
+	Set interval text: 3, 7, "na"
+	Set interval text: 3, 8, "rá"
+	Set interval text: 3, 9, "sa"
+	Set interval text: 3, 10, "mi"
+	Set interval text: 3, 11, "ga"
+	Set interval text: 3, 12, "mí"
+	Set interval text: 3, 13, "a"
+	Set interval text: 3, 14, "no"
+	Set interval text: 3, 15, "vo"
+	Set interval text: 3, 16, "ya"
+	Set interval text: 3, 17, "vol"
+	Set interval text: 3, 18, "ver"
+
+elsif n_frase = 53
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "a*"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "i"
+	Insert point: 1, inter_1*5, "e*"
+	Insert point: 1, inter_1*6, "a"
+	Insert point: 1, inter_1*7, "e*"
+	Insert point: 1, inter_1*8, "e"
+	Insert point: 1, inter_1*9, "e"
+	Insert point: 1, inter_1*10, "oa"
+	Insert point: 1, inter_1*11, "i*"
+	Insert point: 1, inter_1*12, "a"
+	Insert point: 1, inter_1*13, "e*"
+	Insert point: 1, inter_1*14, "o"
+	Insert point: 1, inter_1*15, "je*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "Pensaba sinceramente que lo había hecho bien"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*23+inter_3a
+	Insert boundary: 3, inter_3*25+inter_3a
+	Insert boundary: 3, inter_3*27+inter_3a
+	Insert boundary: 3, inter_3*29+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "Pen"
+	Set interval text: 3, 3, "sa"
+	Set interval text: 3, 4, "ba"
+	Set interval text: 3, 5, "sin"
+	Set interval text: 3, 6, "ce"
+	Set interval text: 3, 7, "ra"
+	Set interval text: 3, 8, "men"
+	Set interval text: 3, 9, "te"
+	Set interval text: 3, 10, "que"
+	Set interval text: 3, 11, "loha"
+	Set interval text: 3, 12, "bí"
+	Set interval text: 3, 13, "a"
+	Set interval text: 3, 14, "he"
+	Set interval text: 3, 15, "cho"
+	Set interval text: 3, 16, "bien"
+
+elsif n_frase = 54
+	Insert point: 1, inter_1, "e"
+	Insert point: 1, inter_1*2, "o"
+	Insert point: 1, inter_1*3, "a"
+	Insert point: 1, inter_1*4, "o*"
+	Insert point: 1, inter_1*5, "e"
+	Insert point: 1, inter_1*6, "uj*"
+	Insert point: 1, inter_1*7, "a"
+	Insert point: 1, inter_1*8, "o"
+	Insert point: 1, inter_1*9, "o"
+	Insert point: 1, inter_1*10, "e"
+	Insert point: 1, inter_1*11, "jo*"
+	Insert point: 1, inter_3*ns2+inter_3a, "fn"
+	Insert boundary: 2, inter_3+inter_3a
+	Insert boundary: 2, inter_3*ns2+(inter_3a*2)
+	Set interval text: 2, 2, "El corazón se cuida con obsesión"
+	Insert boundary: 3, inter_3+inter_3a
+	Insert boundary: 3, inter_3*3+inter_3a
+	Insert boundary: 3, inter_3*5+inter_3a
+	Insert boundary: 3, inter_3*7+inter_3a
+	Insert boundary: 3, inter_3*9+inter_3a
+	Insert boundary: 3, inter_3*11+inter_3a
+	Insert boundary: 3, inter_3*13+inter_3a
+	Insert boundary: 3, inter_3*15+inter_3a
+	Insert boundary: 3, inter_3*17+inter_3a
+	Insert boundary: 3, inter_3*19+inter_3a
+	Insert boundary: 3, inter_3*21+inter_3a
+	Insert boundary: 3, inter_3*ns2+(inter_3a*2)
+	Set interval text: 3, 2, "El"
+	Set interval text: 3, 3, "co"
+	Set interval text: 3, 4, "ra"
+	Set interval text: 3, 5, "zón"
+	Set interval text: 3, 6, "se"
+	Set interval text: 3, 7, "cui"
+	Set interval text: 3, 8, "da"
+	Set interval text: 3, 9, "co"
+	Set interval text: 3, 10, "nob"
+	Set interval text: 3, 11, "se"
+	Set interval text: 3, 12, "sión"
+
+endif
+
+nombre_t$= audio$[i] + exten$
+
+Save as text file: directorio$+"\"+nombre_t$
+
+
+endfor
