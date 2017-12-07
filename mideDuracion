@@ -1,0 +1,33 @@
+form Informante 
+	word apellido hernandez
+	natural grupo 20
+	choice emision 1
+		button 1
+		button 2
+		button 3
+	choice modalidad 1
+		button i
+		button f
+	choice sexo 1
+		button f
+		button m
+endform
+
+textgrid$ = selected$ ("TextGrid")
+
+Down to Table: "no", 2, "no", "no"
+Append difference column: "tmax", "tmin", "duracion"
+Remove column: "tmin"
+Remove column: "tmax"
+Insert column: 1, "grupo"
+Insert column: 2, "apellido"
+Insert column: 4, "modalidad"
+
+n_filas = Get number of rows
+
+for i to n_filas
+	Set string value: i, "apellido", apellido$
+	Set numeric value: i, "grupo", grupo
+	Set string value: i, "modalidad", modalidad$
+endfor
+
