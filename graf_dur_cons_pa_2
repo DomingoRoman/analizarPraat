@@ -1,0 +1,186 @@
+
+tabla = selected("Table")
+tabla$ = selected$("Table")
+
+select tabla
+f = Extract rows where column (text): "modalidad", "is equal to", "f"
+
+select tabla
+i = Extract rows where column (text): "modalidad", "is equal to", "i"
+
+select f
+p_f = Extract rows where column (text): "text", "is equal to", "p"
+
+select f
+t_f = Extract rows where column (text): "text", "is equal to", "t"
+
+select f
+k_f = Extract rows where column (text): "text", "is equal to", "k"
+
+select f
+s_f = Extract rows where column (text): "text", "is equal to", "s"
+
+select f
+f_f = Extract rows where column (text): "text", "is equal to", "f"
+
+select f
+x_f = Extract rows where column (text): "text", "is equal to", "s"
+
+select i
+p_i = Extract rows where column (text): "text", "is equal to", "p"
+
+select i
+t_i = Extract rows where column (text): "text", "is equal to", "t"
+
+select i
+k_i = Extract rows where column (text): "text", "is equal to", "k"
+
+select i
+s_i = Extract rows where column (text): "text", "is equal to", "s"
+
+select i
+f_i = Extract rows where column (text): "text", "is equal to", "f"
+
+select i
+x_i = Extract rows where column (text): "text", "is equal to", "x"
+
+
+select p_f
+plus t_f
+plus k_f
+plus p_i
+plus t_i
+plus k_i
+plus s_f
+plus x_f
+plus f_f
+plus s_i
+plus x_i
+plus f_i
+tabla2 = Append
+
+f = Extract rows where column (text): "modalidad", "is equal to", "f"
+
+select tabla
+i = Extract rows where column (text): "modalidad", "is equal to", "i"
+
+
+
+select f
+p_f = Extract rows where column (text): "text", "is equal to", "p"
+
+select f
+t_f = Extract rows where column (text): "text", "is equal to", "t"
+
+select f
+k_f = Extract rows where column (text): "text", "is equal to", "k"
+
+select f
+s_f = Extract rows where column (text): "text", "is equal to", "s"
+
+select f
+f_f = Extract rows where column (text): "text", "is equal to", "f"
+
+select f
+x_f = Extract rows where column (text): "text", "is equal to", "s"
+
+select i
+p_i = Extract rows where column (text): "text", "is equal to", "p"
+
+select i
+t_i = Extract rows where column (text): "text", "is equal to", "t"
+
+select i
+k_i = Extract rows where column (text): "text", "is equal to", "k"
+
+select i
+s_i = Extract rows where column (text): "text", "is equal to", "s"
+
+select i
+f_i = Extract rows where column (text): "text", "is equal to", "f"
+
+select i
+x_i = Extract rows where column (text): "text", "is equal to", "x"
+
+
+
+select p_f
+xpf = Get mean: "duracion"
+
+select t_f
+xtf = Get mean: "duracion"
+
+select k_f
+xkf = Get mean: "duracion"
+
+select p_i
+xpi = Get mean: "duracion"
+
+select t_i
+xti = Get mean: "duracion"
+
+select k_i
+xki = Get mean: "duracion"
+
+
+select s_f
+xsf = Get mean: "duracion"
+
+select f_f
+xff = Get mean: "duracion"
+
+select x_f
+xxf = Get mean: "duracion"
+
+select s_i
+xsi = Get mean: "duracion"
+
+select x_i
+xxi = Get mean: "duracion"
+
+select f_i
+xfi = Get mean: "duracion"
+
+Select inner viewport: 0.5, 5, 0.5, 4
+
+selectObject: f
+Blue
+Scatter plot: "text", 0, 7, "duracion", 0, 0.4, "text", 10, "no"
+
+Green
+selectObject: i
+Scatter plot: "text", 0, 7, "duracion", 0, 0.4, "text", 10, "no"
+
+Draw inner box
+One mark bottom: 1, "no", "yes", "no", "f"
+One mark bottom: 2, "no", "yes", "no", "k"
+One mark bottom: 3, "no", "yes", "no", "p"
+One mark bottom: 4, "no", "yes", "no", "s"
+One mark bottom: 5, "no", "yes", "no", "t"
+One mark bottom: 6, "no", "yes", "no", "x"
+
+
+Marks left every: 1, 0.05, "yes", "yes", "yes"
+
+Paint circle (mm): "blue", 3, xpf, 2.5
+Paint circle (mm): "red", 3, xpi, 2.5
+Paint circle (mm): "blue", 2, xkf, 2.5
+Paint circle (mm): "red", 2, xki, 2.5
+Paint circle (mm): "blue", 1, xff, 2.5
+Paint circle (mm): "red", 1, xfi, 2.5
+Paint circle (mm): "blue", 4, xsf, 2.5
+Paint circle (mm): "red", 4, xsi, 2.5
+Paint circle (mm): "blue", 5, xtf, 2.5
+Paint circle (mm): "red", 5, xti, 2.5
+Paint circle (mm): "blue", 6, xxf, 2.5
+Paint circle (mm): "red", 6, xxi, 2.5
+
+
+
+Black
+
+Select outer viewport: 0.2, 5, 0.4, 4.2
+
+Save as 300-dpi PNG file: "/Users/historiadores/Documents/Domingo/2017_fonetica/pa2/datageneral.png"
+
+
