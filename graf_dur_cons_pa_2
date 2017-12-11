@@ -24,7 +24,7 @@ select f
 f_f = Extract rows where column (text): "text", "is equal to", "f"
 
 select f
-x_f = Extract rows where column (text): "text", "is equal to", "s"
+x_f = Extract rows where column (text): "text", "is equal to", "x"
 
 select i
 p_i = Extract rows where column (text): "text", "is equal to", "p"
@@ -82,7 +82,7 @@ select f
 f_f = Extract rows where column (text): "text", "is equal to", "f"
 
 select f
-x_f = Extract rows where column (text): "text", "is equal to", "s"
+x_f = Extract rows where column (text): "text", "is equal to", "x"
 
 select i
 p_i = Extract rows where column (text): "text", "is equal to", "p"
