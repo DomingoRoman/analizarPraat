@@ -1,0 +1,101 @@
+# Script en Praat
+# USACH 2017
+# estudio de pronunicación de haitianos
+
+
+directorioTrabajo$ = chooseDirectory$: "Elige la carpeta para los archivos"
+
+# selección del sonido
+sonido$ = selected$ ("Sound")
+sonido = selected ("Sound")
+tgrid = selected("TextGrid")
+
+extens_S$ = ".wav"
+extens_T$ = ".TextGrid"
+extens_Tb$ = ".Table"
+
+tabla = Create Table with column names: sonido$, 1, "informante tipo sexo palabra nsilabas nfonemas 
+...duracion velFonol velFonet velSilFonol velSilFonet"
+
+select tgrid
+palabra$ = Get label of interval: 2, 2
+
+fin = Get end time of interval: 2, 2
+ini = Get start time of interval: 2, 2
+dur = fin-ini
+
+
+# calcula la velocidad
+form Cálculo de velocidad
+	real informante 1
+	choice tipo_inform 1
+		option estudio
+		option control
+	choice sexo_inform 1
+		option hombre
+		option mujer
+	real ndeFonemas 5
+	real ndeSonidos 6
+	real ndeSilabasFonologicas 2
+	real ndeSilabasFoneticas 2
+endform
+
+# calculos generales de velocidad
+
+velFonol = dur/ndeFonemas
+velFonet =  dur/ndeSonidos
+velSilFonol = dur/ndeSilabasFonologicas
+velSilFonet = dur/ndeSilabasFoneticas
+
+# Pone valores con tres decimales
+velFonol2d$ = fixed$(velFonol,3)
+velFonet2d$ = fixed$(velFonet,3)
+velSilFonol2d$ = fixed$(velSilFonol,3)
+velSilFonet2d$ = fixed$(velSilFonet,3)
+
+# Selecciona la tabla 
+select tabla
+Set string value: 1, "informante", "1"
+Set string value: 1, "sexo", sexo_inform$
+Set string value: 1, "tipo", tipo_inform$
+Set string value: 1, "palabra", palabra$
+Set numeric value: 1, "nsilabas", ndeSilabasFonologicas
+Set numeric value: 1, "nfonemas", ndeFonemas
+Set numeric value: 1, "duracion", dur
+Set numeric value: 1, "velFonol", velFonol
+Set numeric value: 1, "velFonet", velFonet
+Set numeric value: 1, "velSilFonol", velSilFonol
+Set numeric value: 1, "velSilFonet", velSilFonet
+
+# información a la pantalla
+writeInfoLine: "----"
+appendInfoLine: "inform",tab$,"sexo",tab$,"tipo",tab$,"dur",tab$,"velFono",tab$,"velFoné",
+...tab$,"velSilFonol",tab$,"velSilFoné"
+
+appendInfoLine: informante,tab$,sexo_inform$,tab$,tipo_inform$,tab$,fixed$(dur,3),tab$,velFonol2d$,tab$,
+...velFonet2d$,tab$,velSilFonol2d$,tab$,velSilFonet2d$
+
+
+## Nombre de objeto y archivo
+# el número del informante como string para nombre de archivo
+informante$ = string$(informante)
+select sonido
+Rename: informante$+"-"+palabra$
+select tgrid
+Rename: informante$+"-"+palabra$
+
+
+select sonido
+Save as WAV file: directorioTrabajo$+"/"+sonido$+extens_S$
+
+select tgrid
+Save as text file: directorioTrabajo$+"/"+sonido$+extens_T$
+
+select tabla
+Save as comma-separated file: directorioTrabajo$+"/"+sonido$+extens_Tb$
+
+
+# Prepara para script 2
+select tgrid
+tier = Extract one tier: 3
+plus sonido
