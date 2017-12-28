@@ -1,7 +1,11 @@
+# # Script en Praat# 
 # Gráficos en Praat 6.0.31
-# Gráfico simple: oscilograma espectrograma de banda ancha
-# y marcas en un TextGrid de punto
- 
+# Gráfico oscilograma espectrograma de banda ancha
+# USACH 2017
+# estudio de pronunciación de haitianos 
+
+
+
 Erase all
 
 # Seleccionar carpeta para gráficos
@@ -69,3 +73,4 @@ endif
 
 Save as PDF file: directorioGraficos$+"/"+sonido$+extensionGraficos_pdf$
 Save as 600-dpi PNG file: directorioGraficos$+"/"+sonido$+extensionGraficos_png$
+
