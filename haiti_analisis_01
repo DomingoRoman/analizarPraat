@@ -1,21 +1,23 @@
 # Script en Praat
-# USACH 2017
-# estudio de pronunicación de haitianos
-
+# Laboratorio de Fonética USACH 2017
+# estudio de pronunciación de haitianos
 
 directorioTrabajo$ = chooseDirectory$: "Elige la carpeta para los archivos"
 
+
 # selección del sonido
+
 sonido$ = selected$ ("Sound")
 sonido = selected ("Sound")
 tgrid = selected("TextGrid")
 
+# extensiones para nombres de archivos
 extens_S$ = ".wav"
 extens_T$ = ".TextGrid"
 extens_Tb$ = ".Table"
 
-tabla = Create Table with column names: sonido$, 1, "informante tipo sexo palabra nsilabas nfonemas 
-...duracion velFonol velFonet velSilFonol velSilFonet"
+tabla = Create Table with column names: sonido$, 1, "informante tipo sexo palabra categAcentual nsilabas nfonemas 
+... duracion velFonol velFonet velSilFonol velSilFonet"
 
 select tgrid
 palabra$ = Get label of interval: 2, 2
@@ -23,7 +25,6 @@ palabra$ = Get label of interval: 2, 2
 fin = Get end time of interval: 2, 2
 ini = Get start time of interval: 2, 2
 dur = fin-ini
-
 
 # calcula la velocidad
 form Cálculo de velocidad
@@ -34,11 +35,38 @@ form Cálculo de velocidad
 	choice sexo_inform 1
 		option hombre
 		option mujer
+	choice categAcentual 1
+		option aguda
+		option grave
+		option esdrújula
 	real ndeFonemas 5
-	real ndeSonidos 6
+	real ndeSonidos 5
 	real ndeSilabasFonologicas 2
 	real ndeSilabasFoneticas 2
 endform
+
+
+if tipo_inform == 1
+	tipo_inform_2$ = "est"
+elsif tipo_inform == 2
+	tipo_inform_2$ = "con"
+endif
+
+
+if sexo_inform == 1
+	sexo_inform2$ = "h"
+elsif sexo_inform == 2
+	sexo_inform2$ = "m"
+endif
+
+if categAcentual == 1
+	categAcentual2$ = "ag"
+elsif categAcentual == 2
+	categAcentual2$ = "gr"
+elsif categAcentual == 3
+	categAcentual2$ = "es"
+endif
+
 
 # calculos generales de velocidad
 
@@ -55,10 +83,11 @@ velSilFonet2d$ = fixed$(velSilFonet,3)
 
 # Selecciona la tabla 
 select tabla
-Set string value: 1, "informante", "1"
-Set string value: 1, "sexo", sexo_inform$
-Set string value: 1, "tipo", tipo_inform$
+Set numeric value: 1, "informante", informante
+Set string value: 1, "sexo", sexo_inform2$
+Set string value: 1, "tipo", tipo_inform_2$
 Set string value: 1, "palabra", palabra$
+Set string value: 1, "categAcentual", categAcentual2$
 Set numeric value: 1, "nsilabas", ndeSilabasFonologicas
 Set numeric value: 1, "nfonemas", ndeFonemas
 Set numeric value: 1, "duracion", dur
@@ -66,6 +95,7 @@ Set numeric value: 1, "velFonol", velFonol
 Set numeric value: 1, "velFonet", velFonet
 Set numeric value: 1, "velSilFonol", velSilFonol
 Set numeric value: 1, "velSilFonet", velSilFonet
+
 
 # información a la pantalla
 writeInfoLine: "----"
@@ -75,15 +105,15 @@ appendInfoLine: "inform",tab$,"sexo",tab$,"tipo",tab$,"dur",tab$,"velFono",tab$,
 appendInfoLine: informante,tab$,sexo_inform$,tab$,tipo_inform$,tab$,fixed$(dur,3),tab$,velFonol2d$,tab$,
 ...velFonet2d$,tab$,velSilFonol2d$,tab$,velSilFonet2d$
 
-
 ## Nombre de objeto y archivo
 # el número del informante como string para nombre de archivo
 informante$ = string$(informante)
-select sonido
-Rename: informante$+"-"+palabra$
-select tgrid
-Rename: informante$+"-"+palabra$
 
+select sonido
+Rename: tipo_inform_2$+"-"+informante$+"-"+sexo_inform2$+"-"+categAcentual2$+"-"+palabra$
+
+select tgrid
+Rename: tipo_inform_2$+"-"+informante$+"-"+sexo_inform2$+"-"+categAcentual2$+"-"+palabra$
 
 select sonido
 Save as WAV file: directorioTrabajo$+"/"+sonido$+extens_S$
@@ -94,8 +124,9 @@ Save as text file: directorioTrabajo$+"/"+sonido$+extens_T$
 select tabla
 Save as comma-separated file: directorioTrabajo$+"/"+sonido$+extens_Tb$
 
-
 # Prepara para script 2
 select tgrid
 tier = Extract one tier: 3
 plus sonido
+
+
