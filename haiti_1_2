@@ -1,6 +1,35 @@
 # Script en Praat
 # Laboratorio de Fonética USACH 2017
-# estudio de pronunciación de haitianos
+# Script realizado para el estudio 
+# Dificultades fonéticas de la pronunciación de español por haitianos
+#
+# Este script es software libre: puede ser distribuido
+# y/o modificado bajo los términos de la licencia
+# GNU General Public License publicada por la Free Software
+# Foundation, ya sea en su versión 3 o (según se prefiera)
+# cualquier versión posterior.
+#
+# Este script se distribuye con la intención de que sea útil,
+# pero SIN GARANTÍA ALGUNA; ni siquiera con la garantía
+# implícita de COMERCIABILIDAD o de PROPIEDAD PARA UN FIN
+# PARTICULAR. Más detalles pueden encontrarse en el texto de
+# la GNU General Public License.
+#
+# El script debería haber sido distribuido con una copia de la
+# GNU General Public License. Si no, este puede encontrarse en
+# <http://www.gnu.org/licenses/>.
+#
+# Copyright 2017: Domingo Román, Laboratorio de Fonética USACH.
+######################################################################
+
+
+#####
+##### OBSERVACIONES AL FUNCIONAMIENTO
+#####
+# Esta versión del script requiere cambiar el color del oscilograma
+# manualmente. para el grupo de estudio se prefiere AZUL, en tanto
+# que para el grupo control, VERDE
+# Esto se realiza en la línea 154
 
 directorio$ = chooseDirectory$: "Elige la carpeta para los archivos"
 
@@ -20,10 +49,10 @@ endform
 
 if tipo_inform == 1
 	tipo_inform_2$ = "est"
-	color = Colour: "blue"
+	color = Blue
 elsif tipo_inform == 2
 	tipo_inform_2$ = "con"
-	color = Colour: "green"
+	color = Green
 endif
 
 if sexo_inform == 1
@@ -36,7 +65,6 @@ endif
 
 informante$ = string$(informante)
 
-
 n  = Get number of intervals: 1
 
 for i to n
@@ -44,9 +72,19 @@ for i to n
     fin [i] = Get end time of interval: 1, i
 endfor
 
+# 	Crea tabla de datos
+tabla = Create Table with column names: "tabla", n, "informante tipo sexo palabra duracion silFonet velFonet 
+... velSilFonet"
+
+
 for i to n
     select sonido
+
+# Extrae la porción correspondiente del Sound
     snd = Extract part: ini[i], fin[i], "rectangular", 1, "no"
+	Scale peak: 0.99
+
+# Extrae la porción correspondiente del TextGrid
     select tgrid
     tgr = Extract part: ini[i], fin[i], "no"
 	tgr$ = selected$("TextGrid")
@@ -54,7 +92,7 @@ for i to n
 		if n_inter_tgr == 3
 			palabra$ = Get label of interval: 2, 2
 
-#	Número de sonidos
+#	Número de sonidos en la tercera capa
 			n_sonidos = Get number of points: 3
 			name$ = Rename: tipo_inform_2$+"-"+informante$+"-"+sexo_inform2$+"-"+palabra$
 
@@ -63,7 +101,19 @@ for i to n
 			ini = Get start time of interval: 2, 2
 			dur = fin-ini
 
-# 	velocidad fonética
+#	Contar vocales en el estrato 3 para sílabas fonéticas
+
+			vocA = Count points where: 3, "contains", "a"
+			vocE = Count points where: 3, "contains", "e"
+			vocI = Count points where: 3, "contains", "i"
+			vocO = Count points where: 3, "contains", "o"
+			vocU = Count points where: 3, "contains", "u"
+
+silFonet = vocA+vocE+vocI+vocO+vocU
+
+velSilFonet = dur/silFonet
+
+# 	velocidad fonética por sonidos
 			velFonet =  dur/n_sonidos
 
 #	Guarda el TextGrid
@@ -74,24 +124,19 @@ for i to n
 			Rename: tipo_inform_2$+"-"+informante$+"-"+sexo_inform2$+"-"+palabra$
 			Save as WAV file: tipo_inform_2$+"-"+informante$+"-"+sexo_inform2$+"-"+palabra$ + ".wav"
 
-# 	Crea tabla de datos
-			tabl = Create Table with column names: "tabla", 1, "informante tipo sexo 
-			... palabra duracion velFonet 
-			... velSilFonol velSilFonet"
-
 #	Inserta valores en la tabla de datos
-			Set numeric value: 1, "informante", informante
-			Set string value: 1, "sexo", sexo_inform2$
-			Set string value: 1, "tipo", tipo_inform_2$
-			Set string value: 1, "palabra", palabra$
-			Set numeric value: 1, "duracion", dur
-			Set numeric value: 1, "velFonet", velFonet
 
-#	Guarda la tabla de datos
-			Rename: tipo_inform_2$+"-"+informante$+"-"+sexo_inform2$+"-"+palabra$
-			Save as comma-separated file: tipo_inform_2$+"-"+informante$+"-"+sexo_inform2$+"-"+palabra$ +".Table"
+			select tabla
+			Set numeric value: i, "informante", informante
+			Set string value: i, "sexo", sexo_inform2$
+			Set string value: i, "tipo", tipo_inform_2$
+			Set string value: i, "palabra", palabra$
+			Set numeric value: i, "duracion", dur
+			Set numeric value: i, "velFonet", velFonet
+			Set numeric value: i, "silFonet", silFonet
+			Set numeric value: i, "velSilFonet", velSilFonet
 
-# ETAPA Gráficos
+# Sección gráficos
 			Erase all
 			
 				select snd
@@ -103,7 +148,9 @@ for i to n
 
 				select snd
 				Select inner viewport: 0.5, 6, 0.5, 2
-				color
+
+# CAMBIO MANUAL DEL COLOR: en la línea seguiente, cambie "Blue" por "Green" para el grupo control
+				Blue
 				Draw: 0, 0, 0, 0, "no", "Curve"
 				One mark left: 0, "yes", "no", "yes", ""
 				Draw inner box
@@ -119,11 +166,18 @@ for i to n
 				Black
 				Draw: 0, 0, "yes", "yes", "no"
 				Draw inner box
-				pause
+#				pause
 				Select inner viewport: 0.5, 6, 0.4999999999999996, 4.875
 				Text top: "no", snd$
 				Select outer viewport: 0.35, 6.6, 0.28, 4.875
 				Save as PDF file: tipo_inform_2$+"-"+informante$+"-"+sexo_inform2$+"-"+palabra$ + ".pdf"
-				pause
+#				pause
 		endif
 endfor
+
+#	Guarda la tabla de datos
+select tabla
+Save as comma-separated file: tipo_inform_2$+"-"+informante$+"-"+sexo_inform2$+".Table"
+Extract rows where column (number): "velSilFonet", "greater than", 0
+Save as comma-separated file: tipo_inform_2$+"-"+informante$+"-"+sexo_inform2$+"-Parcial"+".Table"
+
