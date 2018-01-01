@@ -111,10 +111,10 @@ for i to n
 
 silFonet = vocA+vocE+vocI+vocO+vocU
 
-velSilFonet = dur/silFonet
+velSilFonet = silFonet/dur
 
 # 	velocidad fonética por sonidos
-			velFonet =  dur/n_sonidos
+			velFonet =  n_sonidos/dur
 
 #	Guarda el TextGrid
 			Save as text file: tipo_inform_2$+"-"+informante$+"-"+sexo_inform2$+"-"+palabra$+ ".TextGrid"
@@ -180,4 +180,3 @@ select tabla
 Save as comma-separated file: tipo_inform_2$+"-"+informante$+"-"+sexo_inform2$+".Table"
 Extract rows where column (number): "velSilFonet", "greater than", 0
 Save as comma-separated file: tipo_inform_2$+"-"+informante$+"-"+sexo_inform2$+"-Parcial"+".Table"
-
