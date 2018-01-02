@@ -2,6 +2,51 @@ sonido = selected("Sound")
 tgrid = selected("TextGrid")
 sonido$ = selected$("Sound")
 
+tipo_inform$ = left$(sonido$,3)
+select tgrid
+n_inter_tgr = Get number of intervals: 2
+
+if n_inter_tgr == 3
+	palabra$ = Get label of interval: 2, 2
+endif
+
+### extracción del número del informante (dos posibilidades:de uno o de dos dígitos)
+
+largo_palabra = length(palabra$)
+
+largo_nombre = length(sonido$)
+
+primer_guion = index(sonido$, "-")
+
+buscar_guion_nombre$ = left$(sonido$,6)
+
+ultimo$ = right$ (buscar_guion_nombre$,1)
+
+if ultimo$ == "-"
+	ene_info$ = mid$(buscar_guion_nombre$,5,1)
+else
+	ene_info$ = mid$(buscar_guion_nombre$,5,2)
+endif
+
+buscar_guion_sexo$ = left$(sonido$,8)
+
+## sexo
+buscar_guion_sexo$ = left$(sonido$,8)
+ultimo_sex$ = right$ (buscar_guion_sexo$,1)
+if ultimo_sex$ == "-"
+	sex_info$ = mid$(buscar_guion_sexo$,7,1)
+else
+	sex_info$ = mid$(buscar_guion_sexo$,8,1)
+endif
+
+
+writeInfoLine : tipo_inform$, tab$, palabra$,tab$, largo_palabra, tab$, largo_nombre,tab$,primer_guion, tab$,
+... buscar_guion_nombre$, tab$, buscar_guion_nombre$,tab$, ultimo$,tab$, ene_info$, tab$, buscar_guion_sexo$,tab$,
+... sex_info$
+
+select sonido
+plus tgrid
+
 
 form Lista de fenómenos
 comment casos de eRe
@@ -53,7 +98,6 @@ vocU = Count points where: 3, "contains", "u"
 silFonet = vocA+vocE+vocI+vocO+vocU
 
 
-
 # 	velocidades fonética por sonidos y por sílaba
 velFonet =  n_sonidos/dur
 velSilFonet = silFonet/dur
@@ -70,12 +114,13 @@ tabla = Create Table with column names: "tabla", n, "informante tipo sexo palabr
 #	Inserta valores en la tabla de datos
 
 select tabla
-Set numeric value: i, "informante", informante
-Set string value: i, "sexo", sexo_inform2$
-Set string value: i, "tipo", tipo_inform_2$
-Set string value: i, "palabra", palabra$
-Set numeric value: i, "duracion", dur
-Set numeric value: i, "velFonet", velFonet
-Set numeric value: i, "silFonet", silFonet
-Set numeric value: i, "velSilFonet", velSilFonet
+Set string value: 1, "informante", ene_info$
+Set string value: 1, "sexo", sex_info$
+Set string value: 1, "tipo", tipo_inform$
+Set string value: 1, "palabra", palabra$
+Set numeric value: 1, "duracion", dur
+Set numeric value: 1, "velFonet", velFonet
+Set numeric value: 1, "silFonet", silFonet
+Set numeric value: 1, "velSilFonet", velSilFonet
+
 
