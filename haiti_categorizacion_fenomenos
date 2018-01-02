@@ -1,31 +1,81 @@
+sonido = selected("Sound")
+tgrid = selected("TextGrid")
+sonido$ = selected$("Sound")
+
+
 form Lista de fenómenos
-	optionmenu ere
-		option ere
-		option fricativa
-		option aproximante
-		option como ele intervocalica
-		option como ele en grupo consonantico
-		option como ele final silaba o palabra
-		option omitida al final de silaba o palabra
-		option omitida en grupo consonantico
-	optionmenu esvarabatico 6
-		option con ere
-		option con ele
-	optionmenu erre
-		option como erre
-		option fricativa
-		option ere
-		option ele inicial
-		option ele intervocalica
+comment casos de eRe
+	boolean ere
+	boolean fricativa
+	boolean aproximante
+	boolean ele_intervocalica
+	boolean ele_en_grupo_consonantico
+	boolean ele_final_silaba_o_palabra
+	boolean omitida_al_final_de_silaba_o_palabra
+	boolean omitida_en_grupo_consonantico
+	boolean esvarabatico_con_ere
+	boolean esvarabatico_con_ele
+comment casos de eRRe
+	boolean erre
+	boolean fricativa
+	boolean ere
+	boolean ele_inicial
+	boolean ele_intervocalica
 comment Alargamiento
-		option erre alargada
-	optionmenu otros fenómenos
-		option oclusiva b d g intervocalica
-		option s interdental
-		option x como h
-		option p como f
-		option e por i
-		option alargamiento vocalico
-		option insercion de consonante entre vocales
-		option insercion de elemento vocalico final posconsonante
+	boolean erre_alargada
+	boolean emision_incomprensible
 endform
+
+select tgrid
+n  = Get number of intervals: 1
+for i to n
+    ini [i] = Get start time of interval: 1, i
+    fin [i] = Get end time of interval: 1, i
+endfor
+
+#	Número de sonidos en la tercera capa
+n_sonidos = Get number of points: 3
+
+#	Duración de la palabra
+fin = Get end time of interval: 2, 2
+ini = Get start time of interval: 2, 2
+dur = fin-ini
+
+
+#	Contar vocales en el estrato 3 para sílabas fonéticas
+
+vocA = Count points where: 3, "contains", "a"
+vocE = Count points where: 3, "contains", "e"
+vocI = Count points where: 3, "contains", "i"
+vocO = Count points where: 3, "contains", "o"
+vocU = Count points where: 3, "contains", "u"
+
+silFonet = vocA+vocE+vocI+vocO+vocU
+
+
+
+# 	velocidades fonética por sonidos y por sílaba
+velFonet =  n_sonidos/dur
+velSilFonet = silFonet/dur
+
+
+
+
+# 	Crea tabla de datos
+tabla = Create Table with column names: "tabla", n, "informante tipo sexo palabra duracion silFonet velFonet 
+... velSilFonet r_ere r_fricativa r_aproximante r_ele_intervocal r_ele_grupo r_ r_ele_final r_omision_final 
+...r_omision_grupo ere_esv_ere ere_esv_ele rr_erre rr_fricativa rr_ere rr_ele_inicial rr_ele_intevocal 
+... rr_larga emision_incompren"
+
+#	Inserta valores en la tabla de datos
+
+select tabla
+Set numeric value: i, "informante", informante
+Set string value: i, "sexo", sexo_inform2$
+Set string value: i, "tipo", tipo_inform_2$
+Set string value: i, "palabra", palabra$
+Set numeric value: i, "duracion", dur
+Set numeric value: i, "velFonet", velFonet
+Set numeric value: i, "silFonet", silFonet
+Set numeric value: i, "velSilFonet", velSilFonet
+
