@@ -29,13 +29,6 @@
 
 tablaDatos = selected("Table")
 
-val_max_vel_fonet = Get maximum: "velFonet"
-
-if val_max_vel_fonet > 15
-	val_max_graf_fonet = 20
-else 
-	val_max_graf_fonet = 15
-endif
 
 tabla_sil_1 = Extract rows where column (number): "silFonet", "equal to", 1
 select tablaDatos
@@ -64,6 +57,24 @@ select tabla_sil_4
 n_tabla_sil_4 = Get number of rows
 ene_sil_4$ = string$(n_tabla_sil_4)
 x_tabla_sil_4 = Get mean: "velFonet"
+
+
+select tabla_sil_1
+plus tabla_sil_2
+plus tabla_sil_3
+plus tabla_sil_4
+
+tablaDatos = Append
+
+val_max_vel_fonet = Get maximum: "velFonet"
+
+if val_max_vel_fonet > 15
+	val_max_graf_fonet = 20
+else 
+	val_max_graf_fonet = 15
+endif
+
+
 
 n_total_de_casos = n_tabla_sil_4+n_tabla_sil_3+n_tabla_sil_2+n_tabla_sil_1
 
@@ -100,6 +111,8 @@ One mark top: 4, "no", "yes", "no", "( n = 'ene_sil_4$')"
 
 Select outer viewport: 0.5, 5.44, 0.5, 5.5
 
+pause Guarde el arhivo gráfico
+
 select tabla_sil_1
 plus tabla_sil_2
 plus tabla_sil_3
@@ -107,3 +120,5 @@ plus tabla_sil_4
 Remove
 
 select tablaDatos
+
+pause Guarde tabla de datos
