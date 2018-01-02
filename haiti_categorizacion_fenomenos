@@ -1,0 +1,31 @@
+form Lista de fenómenos
+	optionmenu ere
+		option ere
+		option fricativa
+		option aproximante
+		option como ele intervocalica
+		option como ele en grupo consonantico
+		option como ele final silaba o palabra
+		option omitida al final de silaba o palabra
+		option omitida en grupo consonantico
+	optionmenu esvarabatico 6
+		option con ere
+		option con ele
+	optionmenu erre
+		option como erre
+		option fricativa
+		option ere
+		option ele inicial
+		option ele intervocalica
+comment Alargamiento
+		option erre alargada
+	optionmenu otros fenómenos
+		option oclusiva b d g intervocalica
+		option s interdental
+		option x como h
+		option p como f
+		option e por i
+		option alargamiento vocalico
+		option insercion de consonante entre vocales
+		option insercion de elemento vocalico final posconsonante
+endform
