@@ -10,6 +10,10 @@ if n_inter_tgr == 3
 	palabra$ = Get label of interval: 2, 2
 endif
 
+
+
+
+
 ### extracción del número del informante (dos posibilidades:de uno o de dos dígitos)
 
 largo_palabra = length(palabra$)
@@ -39,33 +43,27 @@ else
 	sex_info$ = mid$(buscar_guion_sexo$,8,1)
 endif
 
-
-writeInfoLine : tipo_inform$, tab$, palabra$,tab$, largo_palabra, tab$, largo_nombre,tab$,primer_guion, tab$,
-... buscar_guion_nombre$, tab$, buscar_guion_nombre$,tab$, ultimo$,tab$, ene_info$, tab$, buscar_guion_sexo$,tab$,
-... sex_info$
-
 select sonido
 plus tgrid
 
-
 form Lista de fenómenos
 comment casos de eRe
-	boolean ere
-	boolean fricativa
-	boolean aproximante
-	boolean ele_intervocalica
-	boolean ele_en_grupo_consonantico
-	boolean ele_final_silaba_o_palabra
-	boolean omitida_al_final_de_silaba_o_palabra
-	boolean omitida_en_grupo_consonantico
+	boolean r_ere
+	boolean r_fricativa
+	boolean r_aproximante
+	boolean r_ele_intervocalica
+	boolean r_ele_en_grupo_consonantico
+	boolean r_ele_final_silaba_o_palabra
+	boolean r_omitida_al_final_de_silaba_o_palabra
+	boolean r_omitida_en_grupo_consonantico
 	boolean esvarabatico_con_ere
 	boolean esvarabatico_con_ele
 comment casos de eRRe
-	boolean erre
-	boolean fricativa
-	boolean ere
-	boolean ele_inicial
-	boolean ele_intervocalica
+	boolean rr_erre
+	boolean rr_fricativa
+	boolean rr_ere
+	boolean rr_ele_inicial
+	boolean rr_ele_intervocalica
 comment Alargamiento
 	boolean erre_alargada
 	boolean emision_incomprensible
@@ -86,7 +84,6 @@ fin = Get end time of interval: 2, 2
 ini = Get start time of interval: 2, 2
 dur = fin-ini
 
-
 #	Contar vocales en el estrato 3 para sílabas fonéticas
 
 vocA = Count points where: 3, "contains", "a"
@@ -97,18 +94,18 @@ vocU = Count points where: 3, "contains", "u"
 
 silFonet = vocA+vocE+vocI+vocO+vocU
 
-
 # 	velocidades fonética por sonidos y por sílaba
 velFonet =  n_sonidos/dur
 velSilFonet = silFonet/dur
 
-
-
-
 # 	Crea tabla de datos
-tabla = Create Table with column names: "tabla", n, "informante tipo sexo palabra duracion silFonet velFonet 
-... velSilFonet r_ere r_fricativa r_aproximante r_ele_intervocal r_ele_grupo r_ r_ele_final r_omision_final 
-...r_omision_grupo ere_esv_ere ere_esv_ele rr_erre rr_fricativa rr_ere rr_ele_inicial rr_ele_intevocal 
+tabla = Create Table with column names: "tabla", n, "informante sexo tipo palabra duracion
+... silFonet velFonet velSilFonet 
+... r_ere r_fricativa r_aproximante r_ele_intervocal 
+... r_ele_grupo r_ele_final r_omision_final 
+... r_omision_grupo ere_esv_ere ere_esv_ele 
+... rr_erre rr_fricativa rr_ere 
+... rr_ele_inicial rr_ele_intervocal 
 ... rr_larga emision_incompren"
 
 #	Inserta valores en la tabla de datos
@@ -119,8 +116,23 @@ Set string value: 1, "sexo", sex_info$
 Set string value: 1, "tipo", tipo_inform$
 Set string value: 1, "palabra", palabra$
 Set numeric value: 1, "duracion", dur
-Set numeric value: 1, "velFonet", velFonet
 Set numeric value: 1, "silFonet", silFonet
+Set numeric value: 1, "velFonet", velFonet
 Set numeric value: 1, "velSilFonet", velSilFonet
-
-
+Set numeric value: 1, "r_ere", r_ere
+Set numeric value: 1, "r_fricativa", r_fricativa
+Set numeric value: 1, "r_aproximante", r_aproximante
+Set numeric value: 1, "r_ele_intervocal", r_ele_intervocalica
+Set numeric value: 1, "r_ele_grupo", r_ele_en_grupo_consonantico
+Set numeric value: 1, "r_ele_final", r_ele_final_silaba_o_palabra
+Set numeric value: 1, "r_omision_final", r_omitida_al_final_de_silaba_o_palabra
+Set numeric value: 1, "r_omision_grupo", r_omitida_en_grupo_consonantico
+Set numeric value: 1, "ere_esv_ere", esvarabatico_con_ere
+Set numeric value: 1, "ere_esv_ele", esvarabatico_con_ele
+Set numeric value: 1, "rr_erre", rr_erre
+Set numeric value: 1, "rr_fricativa", rr_fricativa
+Set numeric value: 1, "rr_ere", rr_ere
+Set numeric value: 1, "rr_ele_inicial", rr_ele_inicial
+Set numeric value: 1, "rr_ele_intervocal", rr_ele_intervocalica
+Set numeric value: 1, "rr_larga", erre_alargada
+Set numeric value: 1, "emision_incompren", emision_incomprensible
