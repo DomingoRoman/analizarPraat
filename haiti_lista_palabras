@@ -1,0 +1,48 @@
+palabra$ = "arroz"
+
+if palabra$ == "flor" or palabra$ == "tren" or palabra$ == "fax"
+	nsilab = 1
+	catego$ = "m"
+
+elsif palabra$ == "patrón" or palabra$ == "Patrón" or palabra$ == "patron" or palabra$ =="Patron"
+... or palabra$ == "abril" or palabra$ == "Abril" 
+... or palabra$ == "parrón" or palabra$ == "Parrón" or palabra$ == "parron" or palabra$ =="Parron"
+... or palabra$ == "pingpong" or palabra$ == "pinpon" or palabra$ =="ping-pong" or palabra$ == "Ping-Pong"
+... or palabra$ == "pinpón" or palabra$ == "Pinpón" 
+... or palabra$ == "francés" or palabra$ == "frances" or palabra$ == "Frances" or palabra$ == "Francés"
+... or palabra$ == "vietnam" or palabra$ == "Vietnam" or palabra$ == "Vietnam"
+... or palabra$ == "reloj" or palabra$ == "Reloj" 
+... or palabra$ == "rincón" or palabra$ == "Rincón" or palabra$ == "rincon" or palabra$ == "Rincon"
+... or palabra$ == "ratón" or palabra$ == "Ratón" or palabra$ == "raton" or palabra$ == "Raton" 
+... or palabra$ == "anís" or palabra$ == "Anís"  or palabra$ == "Anis"  or palabra$ == "anis"
+... or palabra$ == "maní" or palabra$ == "Maní" or palabra$ == "Mani" or palabra$ == "mani"
+... or palabra$ == "haití" or palabra$ == "Haití"  or palabra$ == "haiti"  or palabra$ == "Haiti"
+... or palabra$ == "tambor" or palabra$ == "Tambor"
+... or palabra$ == "limón" or palabra$ == "Limón" or palabra$ == "Limon" or palabra$ == "limon"
+... or palabra$ == "pared" or palabra$ == "Pared"
+... or palabra$ == "melón" or palabra$ == "Melón" or palabra$ == "melon" or palabra$ == "Melon" 
+... or palabra$ == "jarrón"  or palabra$ == "Jarrón" or palabra$ == "jarrón" or palabra$ == "Jarron"
+... or palabra$ == "gritón" or palabra$ == "Gritón" or palabra$ == "griton" or palabra$ == "Griton"
+... or palabra$ == "marrón" or palabra$ == "Marrón" or palabra$ == "marron" or palabra$ == "Marron"
+... or palabra$ == "hostal" or palabra$ == "Hostal"
+... or palabra$ == "vapor" or palabra$ == "Vapor"
+... or palabra$ == "correr" or palabra$ == "Correr"
+... or palabra$ == "dormir" or palabra$ == "Dormir"
+... or palabra$ == "dragón" or palabra$ == "Dragón" or palabra$ == "dragon" or palabra$ == "Dragon"
+... or palabra$ == "ladrón" or palabra$ == "Ladrón" or palabra$ == "ladron" or palabra$ == "Ladron" 
+... or palabra$ == "bailar" or palabra$ == "Bailar"
+... or palabra$ == "turrón" or palabra$ == "Turrón" or palabra$ == "turron" or palabra$ == "Turron"
+... or palabra$ == "brasil" or palabra$ == "Brasil"
+... or palabra$ == "hurón"  or palabra$ == "Hurón" or palabra$ == "huron" or palabra$ == "Huron"
+... or palabra$ == "ají" or palabra$ == "Ají" or palabra$ == "aji" or palabra$ == "Aji"
+... or palabra$ == "canción" or palabra$ == "Canción" or palabra$ == "cancion" or palabra$ == "Cancion"
+... or palabra$ == "motel" or palabra$ == "Motel" 
+... or palabra$ == "mujer" or palabra$ == "Mujer"
+... or palabra$ == "arroz" or palabra$ == "Arroz"
+	nsilab = 2
+	catego$ = "g"
+endif
+
+# or palabra$ == "" 
+
+writeInfoLine: nsilab,tab$,catego$
