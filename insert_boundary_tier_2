@@ -1,0 +1,232 @@
+
+
+Insert interval tier: 2, "vel"
+
+# determinar tiempo de boundary 2 y 3
+
+
+t2 = Get start time of interval: 1, 2
+t3 = Get start time of interval: 1, 3
+t4 = Get start time of interval: 1, 4
+t5 = Get start time of interval: 1, 6
+t6 = Get start time of interval: 1, 7
+t7 = Get start time of interval: 1, 10
+t8 = Get start time of interval: 1, 11
+t9 = Get start time of interval: 1, 12
+t10 = Get start time of interval: 1, 13
+t11 = Get start time of interval: 1, 14
+t12 = Get start time of interval: 1, 15
+t13 = Get start time of interval: 1, 17
+t14 = Get start time of interval: 1, 18
+t15 = Get start time of interval: 1, 21
+t16 = Get start time of interval: 1, 22
+t17 = Get start time of interval: 1, 30
+t18 = Get start time of interval: 1, 31
+t19 = Get start time of interval: 1, 32
+t20 = Get start time of interval: 1, 33
+t21 = Get start time of interval: 1, 34
+t22 = Get start time of interval: 1, 35
+t23 = Get start time of interval: 1, 36
+t24 = Get start time of interval: 1, 41
+t25 = Get start time of interval: 1, 42
+t26 = Get start time of interval: 1, 43
+t27 = Get start time of interval: 1, 44
+t28 = Get start time of interval: 1, 45
+t29 = Get start time of interval: 1, 48
+t30 = Get start time of interval: 1, 50
+
+
+
+
+# asignar tiempo antes y después
+
+ant= 0.7
+des = 0.7
+
+
+
+t2ant = t2-ant
+t2des = t2+des
+
+t3ant = t3-ant
+t3des = t3+des
+
+t4ant = t4-ant
+t4des = t4+des
+
+t5ant = t5-ant
+t5des = t5+des
+
+t6ant = t6-ant
+t6des = t6+des
+
+t7ant = t7-ant
+t7des = t7+des
+
+t8ant = t8-ant
+t8des = t8+des
+
+t9ant = t9-ant
+t9des = t9+des
+
+t10ant = t10-ant
+t10des = t10+des
+
+t11ant = t11-ant
+t11des = t11+des
+
+t12ant = t12-ant
+t12des = t12+des
+
+t13ant = t13-ant
+t13des = t13+des
+
+t14ant = t14-ant
+t14des = t14+des
+
+t15ant = t15-ant
+t15des = t15+des
+
+t16ant = t16-ant
+t16des = t16+des
+
+t17ant = t17-ant
+t17des = t17+des
+
+t18ant = t18-ant
+t18des = t18+des
+
+t19ant = t19-ant
+t19des = t19+des
+
+t20ant = t20-ant
+t20des = t20+des
+
+t21ant = t21-ant
+t21des = t21+des
+
+t22ant = t22-ant
+t22des = t22+des
+
+t23ant = t23-ant
+t23des = t23+des
+
+t24ant = t24-ant
+t24des = t24+des
+
+t25ant = t25-ant
+t25des = t25+des
+
+t26ant = t26-ant
+t26des = t26+des
+
+t27ant = t27-ant
+t27des = t27+des
+
+t28ant = t28-ant
+t28des = t28+des
+
+t29ant = t29-ant
+t29des = t29+des
+
+t30ant = t30-ant
+t30des = t30+des
+
+
+
+Insert boundary: 2, t2ant
+Insert boundary: 2, t2des
+
+Insert boundary: 2, t4ant
+Insert boundary: 2, t4des
+
+Insert boundary: 2, t6ant
+Insert boundary: 2, t6des
+
+Insert boundary: 2, t8ant
+Insert boundary: 2, t8des
+
+Insert boundary: 2, t12ant
+Insert boundary: 2, t12des
+
+Insert boundary: 2, t14ant
+Insert boundary: 2, t14des
+
+Insert boundary: 2, t20ant
+Insert boundary: 2, t20des
+
+Insert boundary: 2, t22ant
+Insert boundary: 2, t22des
+
+Insert boundary: 2, t24ant
+Insert boundary: 2, t24des
+
+Insert boundary: 2, t26ant
+Insert boundary: 2, t26des
+
+Insert boundary: 2, t28ant
+Insert boundary: 2, t28des
+
+Insert boundary: 2, t30ant
+Insert boundary: 2, t30des
+
+Insert boundary: 2, t34ant
+Insert boundary: 2, t34des
+
+Insert boundary: 2, t36ant
+Insert boundary: 2, t36des
+
+
+Insert boundary: 2, t16ant
+Insert boundary: 2, t16des
+
+Insert boundary: 2, t42ant
+Insert boundary: 2, t42des
+
+Insert boundary: 2, t44ant
+Insert boundary: 2, t44des
+
+Insert boundary: 2, t60ant
+Insert boundary: 2, t60des
+
+Insert boundary: 2, t62ant
+Insert boundary: 2, t62des
+
+Insert boundary: 2, t64ant
+Insert boundary: 2, t64des
+
+Insert boundary: 2, t66ant
+Insert boundary: 2, t66des
+
+Insert boundary: 2, t68ant
+Insert boundary: 2, t68des
+
+Insert boundary: 2, t70ant
+Insert boundary: 2, t70des
+
+Insert boundary: 2, t72ant
+Insert boundary: 2, t72des
+
+Insert boundary: 2, t82ant
+Insert boundary: 2, t82des
+
+Insert boundary: 2, t84ant
+Insert boundary: 2, t84des
+
+Insert boundary: 2, t28ant
+Insert boundary: 2, t28des
+
+Insert boundary: 2, t86ant
+Insert boundary: 2, t86des
+
+Insert boundary: 2, t88ant
+Insert boundary: 2, t88des
+
+Insert boundary: 2, t90ant
+Insert boundary: 2, t90des
+
+Insert boundary: 2, t96ant
+Insert boundary: 2, t96des
+
+Insert boundary: 2, t100ant
+Insert boundary: 2, t100des
