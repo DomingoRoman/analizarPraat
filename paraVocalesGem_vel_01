@@ -1,0 +1,132 @@
+margen= 0.9
+
+nIntervalos = Count intervals where: 1, "is not equal to", ""
+
+if nIntervalos < 50
+	writeInfoLine: "Ojo, menos de 50 intervalos"
+endif
+
+# crear tier 2
+
+Insert interval tier: 2, "b"
+
+# punto de inicio del intervalo frase 4
+t4 = Get start time of interval: 1, 8
+selecc_ini4 = t4 - margen
+selecc_fin4 = t4 + margen
+Insert boundary: 2, selecc_ini4
+Insert boundary: 2, selecc_fin4
+Set interval text: 2, 2, "4"
+
+# punto de inicio del intervalo frase 5
+t5 = Get start time of interval: 1, 10
+selecc_ini5 = t5 - margen
+selecc_fin5= t5 + margen
+Insert boundary: 2, selecc_ini5
+Insert boundary: 2, selecc_fin5
+Set interval text: 2, 4, "5"
+
+# punto de inicio del intervalo frase 6
+t6 = Get start time of interval: 1, 12
+selecc_ini6 = t6 - margen
+selecc_fin6 = t6 + margen
+Insert boundary: 2, selecc_ini6
+Insert boundary: 2, selecc_fin6
+Set interval text: 2, 6, "6"
+
+# punto de inicio del intervalo frase 9
+t9 = Get start time of interval: 1, 18
+selecc_ini9 = t9 - margen
+selecc_fin9 = t9 + margen
+Insert boundary: 2, selecc_ini9
+Insert boundary: 2, selecc_fin9
+Set interval text: 2, 8, "9"
+
+# punto de inicio del intervalo frase 12
+t12 = Get start time of interval: 1, 24
+selecc_ini12 = t12 - margen
+selecc_fin12 = t12 + margen
+Insert boundary: 2, selecc_ini12
+Insert boundary: 2, selecc_fin12
+Set interval text: 2, 10, "12"
+
+# punto de inicio del intervalo frase 14
+t14 = Get start time of interval: 1, 28
+selecc_ini14 = t14 - margen
+selecc_fin14 = t14 + margen
+Insert boundary: 2, selecc_ini14
+Insert boundary: 2, selecc_fin14
+Set interval text: 2, 12, "14"
+
+# punto de inicio del intervalo frase 15
+t15 = Get start time of interval: 1, 30
+selecc_ini15 = t15 - margen
+selecc_fin15 = t15 + margen
+Insert boundary: 2, selecc_ini15
+Insert boundary: 2, selecc_fin15
+Set interval text: 2, 14, "15"
+
+# punto de inicio del intervalo frase 16
+t16 = Get start time of interval: 1, 32
+selecc_ini16 = t16 - margen
+selecc_fin16 = t16 + margen
+Insert boundary: 2, selecc_ini16
+Insert boundary: 2, selecc_fin16
+Set interval text: 2, 16, "16"
+
+# punto de inicio del intervalo frase 17
+t17 = Get start time of interval: 1, 34
+selecc_ini17 = t17 - margen
+selecc_fin17 = t17 + margen
+Insert boundary: 2, selecc_ini17
+Insert boundary: 2, selecc_fin17
+Set interval text: 2, 18, "17"
+
+# punto de inicio del intervalo frase 22
+t22 = Get start time of interval: 1, 44
+selecc_ini22 = t22 - margen
+selecc_fin22 = t22 + margen
+Insert boundary: 2, selecc_ini22
+Insert boundary: 2, selecc_fin22
+Set interval text: 2, 20, "22"
+
+# punto de inicio del intervalo frase 23
+t23 = Get start time of interval: 1, 46
+selecc_ini23 = t23 - margen
+selecc_fin23 = t23 + margen
+Insert boundary: 2, selecc_ini23
+Insert boundary: 2, selecc_fin23
+Set interval text: 2, 22, "23"
+
+# punto de inicio del intervalo frase 24
+t24 = Get start time of interval: 1, 48
+selecc_ini24 = t24 - margen
+selecc_fin24 = t24 + margen
+Insert boundary: 2, selecc_ini24
+Insert boundary: 2, selecc_fin24
+Set interval text: 2, 24, "24"
+
+# punto de inicio del intervalo frase 25
+t25 = Get start time of interval: 1, 50
+selecc_ini25 = t25 - margen
+selecc_fin25 = t25 + margen
+Insert boundary: 2, selecc_ini25
+Insert boundary: 2, selecc_fin25
+Set interval text: 2, 26, "25"
+
+# punto de inicio del intervalo frase 26
+t26 = Get start time of interval: 1, 52
+selecc_ini26 = t26 - margen
+selecc_fin26 = t26 + margen
+Insert boundary: 2, selecc_ini26
+Insert boundary: 2, selecc_fin26
+Set interval text: 2, 28, "26"
+
+# punto de inicio del intervalo frase 27
+t27 = Get start time of interval: 1, 54
+selecc_ini27 = t27 - margen
+selecc_fin27 = t27 + margen
+Insert boundary: 2, selecc_ini27
+Insert boundary: 2, selecc_fin27
+Set interval text: 2, 30, "27"
+
