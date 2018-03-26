@@ -14,10 +14,12 @@ nTGrids = numberOfSelected("TextGrid")
 
 for i to nTGrids
 	tg [i] = selected ("TextGrid", i)
+	tg$ [i] = selected$ ("TextGrid", i)
 endfor
 
 for i to nTGrids
 	selectObject: tg [i]
+	tg$ = selected$ ("TextGrid")
 	nintervalos = Get number of intervals: 1
 		if nintervalos = 5
 			writeInfoLine: "Ojo, más de dos"
@@ -26,6 +28,9 @@ for i to nTGrids
 		elsif nintervalos = 4
 			Remove left boundary: 1, 3
 		endif
+	Set interval text: 1, 2,tg$
+View & Edit alone
+
 endfor
 
 for i to nTGrids
@@ -43,63 +48,57 @@ for i to nTGrids
 	fin = Get end time of interval: 1, 2
 	ini = Get start time of interval: 1, 2
 	dur = fin-ini
-	select tabla
-	if 
+	ndefrase = Get label of interval: 1, 2
+	if ndefrase = 4
+		nfonemas = 14
+	elsif ndefrase = 5
+		nfonemas = 12
+	elsif ndefrase = 6
+		nfonemas = 18
+	elsif ndefrase = 9
+		nfonemas = 12
+	elsif ndefrase = 14
+		nfonemas = 14
+	elsif ndefrase = 15
+		nfonemas = 15
+	elsif ndefrase = 16
+		nfonemas = 12
+	elsif ndefrase = 17
+		nfonemas = 14
+	elsif ndefrase = 22
+		nfonemas = 14
+	elsif ndefrase = 23
+		nfonemas = 15
+	elsif ndefrase = 24
+		nfonemas = 19
+	elsif ndefrase = 25
+		nfonemas = 15
+elsif ndefrase = 26
+		nfonemas = 15
+elsif ndefrase = 27
+		nfonemas = 10
+elsif ndefrase = 28
+		nfonemas = 18
+elsif ndefrase = 29
+		nfonemas = 10
+elsif ndefrase = 30
+		nfonemas = 15
+elsif ndefrase = 32
+elsif ndefrase = 34
+elsif ndefrase = 38
+elsif ndefrase = 39
+elsif ndefrase = 41
+elsif ndefrase = 42
+elsif ndefrase = 44
+elsif ndefrase = 47
+elsif ndefrase = 48
+elsif ndefrase = 49
+elsif ndefrase = 50
 
 	endif
 
-endfor
+	select tabla
 
 
-# falta agregar la condición que relaciona numero de fonemas para cada frase
 
-Tienen ese esfuerzo	17
-Nunca vendí hisopos	16
-La cantará afinada	16
-Maldita asesina	14
-Velero rápido	12
-Fideos alimenticios	18	
-El encanto típico	15
-Siempre sufrí hipos	16	
-Vega poniente	12
-Riego jardines	13
-Come ñoqui sabroso	15
-Recorro praderas	14
-Vendió esta hacha	13
-Era Moscú famoso	14
-Un maniquí curioso	15
-Espíritu útil	12
-Una carta triste	14
-Que no raspe papel	14	
-Pérdida notable	14
-Pasto infectado	14
-Era loco ofensivo	15	
-Era casi hijastro	14	
-Visito hospitales	15
-Porque compró orquídeas	19
-País interesante	15
-Gato majadero	12
-Médico malo	10	
-Quiere Perú unificado	18
-Ají picante	10
-Nos cantará tonos	15
-Era casi íntegro	14
-Yo miraré países	14
-Eran cuatro óperas	16
-Teléfono blanco	14
-Era champú útil	12
-Para Bulgaria	12
-Sillón cómodo	11
-Argentina unida	14
-Yo pasaré etapas	14
-Caja inconsistente	17
-Quien encanta serpientes	21	
-Visitará África	14
-Patio de luz	10
-Les narraré hechos	13
-Una tribu pública	15
-Les encantó culebras	18	
-Ayer curó osos	12
-Espíritu unido	13
-Parlantes asesinos	17
-Narran este hecho	12		
+endfor		
