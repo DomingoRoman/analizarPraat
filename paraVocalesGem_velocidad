@@ -37,8 +37,6 @@ endfor
 
 tabla = Create Table with column names: "tablaDurEnunc", nTGrids, "informante frase duracion"
 
-
-
 for i to nTGrids
 	selectObject: tg [i]
 	ninter = Get number of intervals: 1
@@ -46,8 +44,62 @@ for i to nTGrids
 	ini = Get start time of interval: 1, 2
 	dur = fin-ini
 	select tabla
+	if 
+
+	endif
 
 endfor
 
 
 # falta agregar la condición que relaciona numero de fonemas para cada frase
+
+Tienen ese esfuerzo	17
+Nunca vendí hisopos	16
+La cantará afinada	16
+Maldita asesina	14
+Velero rápido	12
+Fideos alimenticios	18	
+El encanto típico	15
+Siempre sufrí hipos	16	
+Vega poniente	12
+Riego jardines	13
+Come ñoqui sabroso	15
+Recorro praderas	14
+Vendió esta hacha	13
+Era Moscú famoso	14
+Un maniquí curioso	15
+Espíritu útil	12
+Una carta triste	14
+Que no raspe papel	14	
+Pérdida notable	14
+Pasto infectado	14
+Era loco ofensivo	15	
+Era casi hijastro	14	
+Visito hospitales	15
+Porque compró orquídeas	19
+País interesante	15
+Gato majadero	12
+Médico malo	10	
+Quiere Perú unificado	18
+Ají picante	10
+Nos cantará tonos	15
+Era casi íntegro	14
+Yo miraré países	14
+Eran cuatro óperas	16
+Teléfono blanco	14
+Era champú útil	12
+Para Bulgaria	12
+Sillón cómodo	11
+Argentina unida	14
+Yo pasaré etapas	14
+Caja inconsistente	17
+Quien encanta serpientes	21	
+Visitará África	14
+Patio de luz	10
+Les narraré hechos	13
+Una tribu pública	15
+Les encantó culebras	18	
+Ayer curó osos	12
+Espíritu unido	13
+Parlantes asesinos	17
+Narran este hecho	12		
