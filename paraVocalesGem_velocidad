@@ -105,9 +105,7 @@ for i to nTGrids
 			nfonemas = 17
 		elsif ndefrase = 50
 			nfonemas = 12
-
 	endif
-
 select tabla
 
 
