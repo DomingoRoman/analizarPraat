@@ -1,0 +1,53 @@
+Extract non-empty intervals: 2, "no"
+
+Scale peak: 0.99
+
+nSounds = numberOfSelected("Sound")
+
+for i to nSounds
+	frase [i] = selected ("Sound", i)
+endfor
+
+To TextGrid (silences): 100, 0, -25, 0.1, 0.1, "", "1"
+
+nTGrids = numberOfSelected("TextGrid")
+
+for i to nTGrids
+	tg [i] = selected ("TextGrid", i)
+endfor
+
+for i to nTGrids
+	selectObject: tg [i]
+	nintervalos = Get number of intervals: 1
+		if nintervalos = 5
+			writeInfoLine: "Ojo, más de dos"
+			Remove left boundary: 1, 4
+			Remove left boundary: 1, 3
+		elsif nintervalos = 4
+			Remove left boundary: 1, 3
+		endif
+endfor
+
+for i to nTGrids
+	selectObject: tg [i]
+	plus frase [i]
+	View & Edit
+	pause
+endfor
+
+tabla = Create Table with column names: "tablaDurEnunc", nTGrids, "informante frase duracion"
+
+
+
+for i to nTGrids
+	selectObject: tg [i]
+	ninter = Get number of intervals: 1
+	fin = Get end time of interval: 1, 2
+	ini = Get start time of interval: 1, 2
+	dur = fin-ini
+	select tabla
+
+endfor
+
+
+# falta agregar la condición que relaciona numero de fonemas para cada frase
