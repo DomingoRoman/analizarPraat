@@ -1,0 +1,11 @@
+n = numberOfSelected ("TextGrid")
+
+for i to n
+	tg [i] = selected ("TextGrid", i)
+	tg$ [i] = selected$ ("TextGrid", i)
+endfor
+
+for i to n
+	selectObject: tg [i]
+	appendInfoLine: tg [i],tab$, tg$ [i]
+endfor
