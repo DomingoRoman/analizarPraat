@@ -1,0 +1,19 @@
+directorio_1$ = "/Users/historiadores/Documents/Domingo/vocales_gem/vocalesGeminadas2016/corpus/neo/"
+
+directorio_2$= "/Users/historiadores/Documents/Domingo/vocales_gem/vocalesGeminadas2016/corpus/neo/prueba/"
+
+lista= Create Strings as file list: "listadeaudios", directorio_1$ + "/*.wav"
+
+writeInfoLine: directorio_1$,tab$,directorio_2$,tab$,lista
+
+n = Get number of strings
+
+appendInfoLine: n
+
+for i from 1 to n
+    selectObject: lista
+    nombreaudio$ = Get string: i
+	appendInfoLine: nombreaudio$
+	audio = Read from file: directorio_1$ + nombreaudio$
+	appendInfoLine: audio
+endfor
