@@ -1,87 +1,224 @@
-# Laboratorio de Fonética de la Facultad de Humanidades,
-# USACH 2016
-# Este script proporciona la etiqueta y los valores 
-# de F1 y F2 a partir de un TextGrid
-# corregido 2018
+# Grafica los formantes del grupo
+# primero femeninos
 
-# Presenta el formulario para los datos del informante 
-form Informante
-	word seudonimo 
-	choice emision 1
-	button 1
-	button 2
-	button 3
-	choice sexo 1
-	button f
-	button m
-endform
+tab = selected("Table")
 
-# Asigna distintos valores dependiendo del sexo del informante
-# para crear el objeto Formant y luego obtener los valores
 
-if sexo$ = "m"
-	valor = 5000
-elsif sexo$ = "f"
-	valor = 5500
-endif
+# Separa tablas para vocales femeninas y masculinas
+tab_f = Extract rows where column (text): "sexo", "is equal to", "f"
+select tab
+tab_m = Extract rows where column (text): "sexo", "is equal to", "m"
 
-# Selecciona el objeto Sound y crea el objeto Formant 
-sonido$ = selected$ ("Sound")
-textgrid$ = selected$ ("TextGrid")
-select Sound 'sonido$'
-To Formant (burg)... 0 5 'valor' 0.025 50
 
-# En el TextGrid, busca el número de marcas, y las etiquetas existentes.
-# En el objeto Formant encuentra los valores para
-# F1, F2, para cada punto 
-# Imprime los datos en la pantalla.
+# Separa las tablas femeninas para cada vocal
+# Calcula promedios para F1 y F2
 
-select TextGrid 'textgrid$'
-ndepunto = Get number of points... 1
+select tab_f
+tab_f_a = Extract rows where column (text): "vocal", "is equal to", "a"
+f_x_a_F1 = Get mean: "F1"
+f_x_a_F2 = Get mean: "F2"
+select tab_f
+tab_f_e = Extract rows where column (text): "vocal", "is equal to", "e"
+f_x_e_F1 = Get mean: "F1"
+f_x_e_F2 = Get mean: "F2"
+select tab_f
+tab_f_i = Extract rows where column (text): "vocal", "is equal to", "i"
+f_x_i_F1 = Get mean: "F1"
+f_x_i_F2 = Get mean: "F2"
+select tab_f
+tab_f_o = Extract rows where column (text): "vocal", "is equal to", "o"
+f_x_o_F1 = Get mean: "F1"
+f_x_o_F2 = Get mean: "F2"
+select tab_f
+tab_f_u = Extract rows where column (text): "vocal", "is equal to", "u"
+f_x_u_F1 = Get mean: "F1"
+f_x_u_F2 = Get mean: "F2"
 
-tabla = Create Table with column names: seudonimo$, ndepunto, "sexo emision vocal F1 F2"
 
-for i to ndepunto
-	select TextGrid 'textgrid$'
-	tiempopunto = Get time of point... 1 'i'
-	etiquetapunto$ = Get label of point... 1 'i'
-	# seleccionar objeto formantes 
-	select Formant 'sonido$'
-	f1 = Get value at time... 1 'tiempopunto' Hertz Linear
-	f2 = Get value at time... 2 'tiempopunto' Hertz Linear
-	select tabla 
-	Set string value: i, "vocal", etiquetapunto$
-	Set string value: i, "sexo", sexo$
-	Set numeric value: i, "emision", emision
-	Set numeric value: i, "F1", f1
-	Set numeric value: i, "F2", f2
-endfor
+# Separa las tablas masculinas para cada vocal
+# Calcula promedios para F1 y F2
 
-select tabla
+select tab_m
+tab_m_a = Extract rows where column (text): "vocal", "is equal to", "a"
+m_x_a_F1 = Get mean: "F1"
+m_x_a_F2 = Get mean: "F2"
+select tab_m
+tab_m_e = Extract rows where column (text): "vocal", "is equal to", "e"
+m_x_e_F1 = Get mean: "F1"
+m_x_e_F2 = Get mean: "F2"
+select tab_m
+tab_m_i = Extract rows where column (text): "vocal", "is equal to", "i"
+m_x_i_F1 = Get mean: "F1"
+m_x_i_F2 = Get mean: "F2"
+select tab_m
+tab_m_o = Extract rows where column (text): "vocal", "is equal to", "o"
+m_x_o_F1 = Get mean: "F1"
+m_x_o_F2 = Get mean: "F2"
+select tab_m
+tab_m_u = Extract rows where column (text): "vocal", "is equal to", "u"
+m_x_u_F1 = Get mean: "F1"
+m_x_u_F2 = Get mean: "F2"
 
-for i to ndepunto
-	valorvocal$ = Get value: i, "vocal"
-	if valorvocal$ = "a" or valorvocal$ = "A"
-		Set string value: i, "vocal", "a"
-	endif
 
-	if valorvocal$ = "e" or valorvocal$ = "E"
-		Set string value: i, "vocal", "e"
-	endif
 
-	if valorvocal$ = "i" or valorvocal$ = "I"
-		Set string value: i, "vocal", "i" 
-	endif
- 
-	if valorvocal$ = "o" or valorvocal$ = "O"
-		Set string value: i, "vocal", "o"
-	endif
 
-	if valorvocal$ = "u" or valorvocal$ = "U"
-		Set string value: i, "vocal", "u"
-	endif
-endfor
+# Gráficos 
+###   1. Todas las ocurrencias de cada una de las vocales femeninas
 
-#Selecciona el objeto Formant y lo borra
-select Formant 'sonido$'
+Erase all
+Select inner viewport: 1, 8, 1, 8
+
+
+Marks left every: 1, 100, "yes", "yes", "yes"
+Marks bottom every: 1, 500, "yes", "yes", "yes"
+
+Draw inner box
+Text top: "no", "Realizaciones femeninas"
+Text left: "yes", "F1"
+Text bottom: "yes", "F2"
+
+
+## Emisiones
+
+select tab_f_a
+Maroon
+Scatter plot: "F2", 3000, 500, "F1", 1250, 100, "vocal", 10, "no"
+
+select tab_f_e
+Green
+Scatter plot: "F2", 3000, 500, "F1", 1250, 100, "vocal", 10, "no"
+
+select tab_f_i
+Red
+Scatter plot: "F2", 3000, 500, "F1", 1250, 100, "vocal", 10, "no"
+
+select tab_f_o
+Blue
+Scatter plot: "F2", 3000, 500, "F1", 1250, 100, "vocal", 10, "no"
+
+select tab_f_u
+Black
+Scatter plot: "F2", 3000, 500, "F1", 1250, 100, "vocal", 10, "no"
+
+# Gráficos 
+###   2. Todas las ocurrencias de cada una de las vocales femeninas con
+### campo de dispersión (sigma)
+
+pause
+
+select tab_f_a
+Maroon
+Draw ellipse (standard deviation): "F2", 3000, 500, "F1", 1250, 100, 1.5, "no"
 Remove
+
+select tab_f_e
+Green
+Draw ellipse (standard deviation): "F2", 3000, 500, "F1", 1250, 100, 1.5, "no"
+Remove
+
+select tab_f_i
+Red
+Draw ellipse (standard deviation): "F2", 3000, 500, "F1", 1250, 100, 1.5, "no"
+Remove
+
+select tab_f_o
+Blue
+Draw ellipse (standard deviation): "F2", 3000, 500, "F1", 1250, 100, 1.5, "no"
+Remove
+
+select tab_f_u
+Black
+Draw ellipse (standard deviation): "F2", 3000, 500, "F1", 1250, 100, 1.5, "no"
+Remove
+
+# Promedios
+
+pause
+
+Text: f_x_i_F2, "centre", f_x_i_F1, "Half", "I"
+Text: f_x_e_F2, "centre", f_x_e_F1, "Half", "E"
+Text: f_x_a_F2, "centre", f_x_a_F1, "Half", "A"
+Text: f_x_o_F2, "centre", f_x_o_F1, "Half", "O"
+Text: f_x_u_F2, "centre", f_x_u_F1, "Half", "U"
+
+Select outer viewport: 0.41666666666666663, 8.2, 0.7, 8.38888888888889
+pause Puede grabar la imagen
+
+
+Erase all
+select tab
+Select inner viewport: 1, 8, 1, 8
+
+Marks left every: 1, 100, "yes", "yes", "yes"
+Marks bottom every: 1, 500, "yes", "yes", "yes"
+
+Draw inner box
+Text top: "no", "Realizaciones masculinas"
+Text left: "yes", "F1"
+Text bottom: "yes", "F2"
+
+
+select tab_m_a
+Maroon
+Scatter plot: "F2", 3000, 500, "F1", 1250, 100, "vocal", 10, "no"
+
+select tab_m_e
+Green
+Scatter plot: "F2", 3000, 500, "F1", 1250, 100, "vocal", 10, "no"
+
+select tab_m_i
+Red
+Scatter plot: "F2", 3000, 500, "F1", 1250, 100, "vocal", 10, "no"
+
+select tab_m_o
+Blue
+Scatter plot: "F2", 3000, 500, "F1", 1250, 100, "vocal", 10, "no"
+
+select tab_m_u
+Black
+Scatter plot: "F2", 3000, 500, "F1", 1250, 100, "vocal", 10, "no"
+
+# Gráficos 
+###   2. Todas las ocurrencias de cada una de las vocales femeninas con
+### campo de dispersión (sigma)
+
+pause
+
+select tab_m_a
+Maroon
+Draw ellipse (standard deviation): "F2", 3000, 500, "F1", 1250, 100, 1.5, "no"
+Remove
+
+select tab_m_e
+Green
+Draw ellipse (standard deviation): "F2", 3000, 500, "F1", 1250, 100, 1.5, "no"
+Remove
+
+select tab_m_i
+Red
+Draw ellipse (standard deviation): "F2", 3000, 500, "F1", 1250, 100, 1.5, "no"
+Remove
+
+select tab_m_o
+Blue
+Draw ellipse (standard deviation): "F2", 3000, 500, "F1", 1250, 100, 1.5, "no"
+Remove
+
+select tab_m_u
+Black
+Draw ellipse (standard deviation): "F2", 3000, 500, "F1", 1250, 100, 1.5, "no"
+Remove
+
+# Promedios
+
+pause
+
+Text: m_x_i_F2, "centre", m_x_i_F1, "Half", "I"
+Text: m_x_e_F2, "centre", m_x_e_F1, "Half", "E"
+Text: m_x_a_F2, "centre", m_x_a_F1, "Half", "A"
+Text: m_x_o_F2, "centre", m_x_o_F1, "Half", "O"
+Text: m_x_u_F2, "centre", m_x_u_F1, "Half", "U"
+
+Select outer viewport: 0.41666666666666663, 8.2, 0.7, 8.38888888888889
+pause Puede grabar la imagen
+
