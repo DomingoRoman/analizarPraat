@@ -1,0 +1,13 @@
+# Pone números correlativos
+# en las marcas establecidas
+# en un estrato de puntos
+# en un TextGrid
+
+tg = selected("TextGrid")
+
+npuntos = Get number of points: 1
+
+for i to npuntos
+	i$ = string$(i)
+	Set point text: 1, i, i$
+endfor
