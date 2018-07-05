@@ -47,3 +47,6 @@ endfor
 # Agrega una columna que resta las duraciones del tiempo del audio y del TextGrid
 select tabla_audios
 Append difference column: "duracion", "duracionTG", "delta_tiempo"
+
+# Pausa para guardar la tabla de datos
+pauseScript: "Este script no ha guardado la tabla de datos automáticamente"
