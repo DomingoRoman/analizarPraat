@@ -4,14 +4,17 @@
 # Directorio con el cual se trabajará
 directorio$ = "/Users/imac/Documents/2018/stef"
 
-# Crea el string con los nombres de los wav
-listaArchivos = Create Strings as file list: "lista", directorio$ + "/*.wav"
+# Crea ambos string con los nombres de los wav y los TextGrids
+listaArchivos = Create Strings as file list: "audios", directorio$ + "/*.wav"
+listaTextGrids = Create Strings as file list: "textgrids", directorio$ + "/*.TextGrid"
+
+
 
 # Crea variable con el número de archivos wav en el directorio
 nArchivos = Get number of strings
 
 # Crea la tabla con los datos
-tabla = Create Table with column names: "table", nArchivos, "nombre fmuestreo duracion canales maxAmper"
+tabla_audios = Create Table with column names: "tabla_audios", nArchivos, "nombre nombreTG fmuestreo duracion duracionTG canales maxAmper tiers "
 
 # Iteración para poner en la tabla todos los valores
 for ifile to nArchivos
@@ -22,7 +25,7 @@ for ifile to nArchivos
 	ncanal = Get number of channels
 	fmuestreo = Get sampling frequency
 	maxim = Get maximum: 0, 0, "Sinc70"
-	select tabla
+	select tabla_audios
 	Set string value: ifile, "nombre", nombreArchivo$
 	Set numeric value: ifile, "fmuestreo", fmuestreo
 	Set numeric value: ifile, "duracion", dur
@@ -30,3 +33,22 @@ for ifile to nArchivos
 	Set numeric value: ifile, "maxAmper", maxim
 endfor
 
+
+# Iteración para poner en la tabla todos los valores ahora del TGrid
+
+for ifile to nArchivos
+	selectObject: listaTextGrids
+	nombreArchivoTG$ = Get string: ifile
+	Read from file: directorio$ + "/" + nombreArchivoTG$
+	durTG = Get total duration
+	ntiers = Get number of tiers
+	select tabla_audios
+	Set string value: ifile, "nombreTG", nombreArchivoTG$
+	Set numeric value: ifile, "duracionTG", durTG
+	Set numeric value: ifile, "tiers", ntiers
+endfor
+
+select tabla_audios
+
+# Agrega una columna que resta las duraciones del tiempo del audio y del TextGrid
+Append difference column: "duracion", "duracionTG", "delta_tiempo"
