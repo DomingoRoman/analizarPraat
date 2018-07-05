@@ -1,5 +1,5 @@
 # Crea una tabla con nombres de archivos y datos básicos
-# de cada uno de los audios
+# de cada uno de los objetos Sound, TextGrid y Pitch
 
 # Directorio con el cual se trabajará
 directorio$ = "/Users/imac/Documents/2018/stef"
