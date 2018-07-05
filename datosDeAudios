@@ -8,8 +8,6 @@ directorio$ = "/Users/imac/Documents/2018/stef"
 listaArchivos = Create Strings as file list: "audios", directorio$ + "/*.wav"
 listaTextGrids = Create Strings as file list: "textgrids", directorio$ + "/*.TextGrid"
 
-
-
 # Crea variable con el número de archivos wav en el directorio
 nArchivos = Get number of strings
 
@@ -33,9 +31,7 @@ for ifile to nArchivos
 	Set numeric value: ifile, "maxAmper", maxim
 endfor
 
-
 # Iteración para poner en la tabla todos los valores ahora del TGrid
-
 for ifile to nArchivos
 	selectObject: listaTextGrids
 	nombreArchivoTG$ = Get string: ifile
@@ -48,7 +44,6 @@ for ifile to nArchivos
 	Set numeric value: ifile, "tiers", ntiers
 endfor
 
-select tabla_audios
-
 # Agrega una columna que resta las duraciones del tiempo del audio y del TextGrid
+select tabla_audios
 Append difference column: "duracion", "duracionTG", "delta_tiempo"
