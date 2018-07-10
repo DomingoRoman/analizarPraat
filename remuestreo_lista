@@ -36,4 +36,5 @@ for ifile to nArchivos
 	appendInfoLine: "---"
 	neoNombre$ = left$ (nombreArchivo$, resta)
 	appendInfoLine: neoNombre$
+#	Save as WAV file: neoNombre$ + /".wav"
 endfor
