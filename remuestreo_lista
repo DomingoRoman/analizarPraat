@@ -1,0 +1,39 @@
+# Crea una tabla con nombres de archivos y datos básicos
+# de cada uno de los objetos Sound, TextGrid y Pitch
+writeInfoLine: "...."
+# Directorio con el cual se trabajará
+directorio$ = "/Users/imac/Documents/2018/stef"
+
+# Crea ambos string con los nombres de los wav y los TextGrids
+listaArchivos = Create Strings as file list: "audios", directorio$ + "/*.wav"
+
+# Crea variable con el número de archivos wav en el directorio
+nArchivos = Get number of strings
+
+# Crea la tabla con los datos
+tabla_audios = Create Table with column names: "tabla_audios", nArchivos, "nombre fmuestreo1 fmuestreo2 duracion canales"
+
+# Iteración para poner en la tabla todos los valores
+for ifile to nArchivos
+	selectObject: listaArchivos
+	nombreArchivo$ = Get string: ifile
+	largoNombreArchivo = length(nombreArchivo$)
+	Read from file: directorio$ + "/" + nombreArchivo$
+	dur = Get total duration
+	ncanal = Get number of channels
+	fmuestreo1 = Get sampling frequency
+	Resample: 44000, 50
+	fmuestreo2 = Get sampling frequency
+	select tabla_audios
+	Set string value: ifile, "nombre", nombreArchivo$
+	Set numeric value: ifile, "duracion", dur
+	Set numeric value: ifile, "canales", ncanal
+	Set numeric value: ifile, "fmuestreo1", fmuestreo1
+	Set numeric value: ifile, "fmuestreo2", fmuestreo2
+	appendInfoLine: largoNombreArchivo
+	resta = largoNombreArchivo-4
+	appendInfoLine: resta
+	appendInfoLine: "---"
+	neoNombre$ = left$ (nombreArchivo$, resta)
+	appendInfoLine: neoNombre$
+endfor
