@@ -15,11 +15,7 @@ for ifile to nArchivos
 	nombreArchivo$ = Get string: ifile
 	largoNombreArchivo = length(nombreArchivo$)
 	Read from file: directorio$ + "/" + nombreArchivo$
-	dur = Get total duration
-	ncanal = Get number of channels
-	fmuestreo1 = Get sampling frequency
 	Resample: 44000, 50
-	fmuestreo2 = Get sampling frequency
 	resta = largoNombreArchivo-4
 	neoNombre$ = left$ (nombreArchivo$, resta)
 	exten$ = ".wav"
