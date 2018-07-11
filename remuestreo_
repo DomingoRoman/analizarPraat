@@ -1,13 +1,12 @@
 # Remuestrea archivos de un directoria
 # Directorio con el cual se trabajará
-directorio$ = "/Users/imac/Documents/2018/stef"
+directorio$ = chooseDirectory$("Opte por un directorio")
 
 # Crea ambos string con los nombres de los wav y los TextGrids
 listaArchivos = Create Strings as file list: "audios", directorio$ + "/*.wav"
 
 # Crea variable con el número de archivos wav en el directorio
 nArchivos = Get number of strings
-
 
 # Iteración para poner en la tabla todos los valores
 for ifile to nArchivos
@@ -20,5 +19,5 @@ for ifile to nArchivos
 	neoNombre$ = left$ (nombreArchivo$, resta)
 	exten$ = ".wav"
 	nombre$ = neoNombre$+exten$
-	Save as WAV file: "/Users/imac/Documents/2018/stef" + "\" + nombre$
+	Save as WAV file: directorio$ + "\" + nombre$
 endfor
