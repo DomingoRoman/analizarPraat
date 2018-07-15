@@ -29,7 +29,7 @@ for ifile to nArchivos
 	exten$ = ".wav"
 	nombre$ = neoNombre$+exten$
 	appendInfoLine: nombre$
-	Save as WAV file: "/Users/imac/Documents/2018/stef" + "\" + nombre$
+	Save as WAV file: "/Users/imac/Documents/2018/stef" + "/" + nombre$
 	select tabla_audios
 	Set string value: ifile, "nombre", nombreArchivo$
 	Set numeric value: ifile, "duracion", dur
