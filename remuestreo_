@@ -19,5 +19,6 @@ for ifile to nArchivos
 	neoNombre$ = left$ (nombreArchivo$, resta)
 	exten$ = ".wav"
 	nombre$ = neoNombre$+exten$
-	Save as WAV file: directorio$ + "\" + nombre$
+	Save as WAV file: directorio$ + "/" + nombre$
+endfor
 endfor
